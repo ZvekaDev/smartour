@@ -1,0 +1,169 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import OfferCard from "../components/OfferCard.astro";
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+import { offers, taxonomy, offerSummaries, categoryIcon, countyName } from "../lib/offers";
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const townsByCounty = new Map<string, typeof taxonomy.towns>();
+for (const town of taxonomy.towns) {
+  const list = townsByCounty.get(town.countySlug) ?? [];
+  list.push(town);
+  townsByCounty.set(town.countySlug, list);
+}
+
+// Server-rendered first page (unfiltered) so the page has real content and
+// works without JS; the client script takes over for filtering/pagination.
+const initialPage = offers.slice(0, 12);
+
+// A handful of the largest counties, used for the "Popular destinations" strip.
+const countyOfferCounts = new Map<string, number>();
+for (const offer of offers) {
+  if (!offer.countySlug) continue;
+  countyOfferCounts.set(offer.countySlug, (countyOfferCounts.get(offer.countySlug) ?? 0) + 1);
+}
+const popularCounties = [...countyOfferCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 4)
+  .map(([slug, count]) => ({ slug, count, name: countyName(slug, locale) }));
+---
+
+<Layout title={t("offers.heroTitle")}>
+  <Hero title={t("offers.heroTitle")} subtitle={t("offers.heroSubtitle")} showSearch compact />
+
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" data-offers-root>
+    <div class="flex flex-col gap-10 lg:flex-row">
+      <!-- Filter sidebar -->
+      <aside class="w-full shrink-0 lg:w-72">
+        <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+          <div class="mb-4 flex items-center justify-between">
+            <h2 class="font-display text-base font-bold text-charcoal">{t("offers.filterBy")}</h2>
+            <button type="button" data-clear-filters class="text-xs font-medium text-coral hover:underline">
+              {t("offers.clearFilters")}
+            </button>
+          </div>
+
+          <input
+            type="text"
+            data-filter-search
+            placeholder={t("offers.searchFilters")}
+            class="mb-4 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-coral focus:outline-none"
+          />
+
+          <h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-muted">{t("offers.dealType")}</h3>
+          <ul class="mb-5 max-h-56 space-y-1.5 overflow-y-auto pr-1 text-sm">
+            {
+              taxonomy.categories.map((cat) => (
+                <li>
+                  <label data-filter-label class="flex cursor-pointer items-center gap-2">
+                    <input type="checkbox" data-filter-type="category" value={cat.slug} class="h-4 w-4 rounded border-slate-300 text-coral focus:ring-coral" />
+                    <span aria-hidden="true">{categoryIcon[cat.slug]}</span>
+                    {cat.names[locale]}
+                  </label>
+                </li>
+              ))
+            }
+          </ul>
+
+          <h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-muted">{t("offers.location")}</h3>
+          <div class="max-h-80 space-y-1 overflow-y-auto pr-1 text-sm">
+            {
+              taxonomy.counties.map((county) => (
+                <details open class="group">
+                  <summary class="flex cursor-pointer list-none items-center gap-2 rounded py-1 hover:bg-slate-50">
+                    <input
+                      type="checkbox"
+                      data-filter-type="county"
+                      value={county.slug}
+                      aria-label={county.names[locale]}
+                      class="h-4 w-4 rounded border-slate-300 text-coral focus:ring-coral"
+                    />
+                    <span data-filter-label class="flex-1">{county.names[locale]}</span>
+                    <svg class="h-3 w-3 text-slate-400 transition-transform group-open:rotate-90" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </summary>
+                  <ul class="ml-6 space-y-1 border-l border-slate-100 pl-3">
+                    {
+                      (townsByCounty.get(county.slug) ?? []).map((town) => (
+                        <li>
+                          <label data-filter-label class="flex cursor-pointer items-center gap-2 text-slate-muted">
+                            <input
+                              type="checkbox"
+                              data-filter-type="town"
+                              value={town.slug}
+                              class="h-4 w-4 rounded border-slate-300 text-coral focus:ring-coral"
+                            />
+                            {town.names[locale]}
+                          </label>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </aside>
+
+      <!-- Results -->
+      <div class="flex-1">
+        <div class="mb-4 flex items-center justify-between">
+          <input
+            type="text"
+            data-keyword-search
+            placeholder={t("search.placeholder")}
+            class="w-full max-w-xs rounded-full border border-slate-200 px-4 py-2 text-sm focus:border-coral focus:outline-none"
+          />
+          <p data-results-count class="text-sm text-slate-muted"></p>
+        </div>
+
+        <div data-results-grid class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {initialPage.map((offer) => <OfferCard offer={offer} />)}
+        </div>
+
+        <nav data-pagination class="mt-8" aria-label={t("a11y.pagination")}></nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular destinations -->
+  <section class="bg-slate-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-8 font-display text-2xl font-bold text-charcoal">{t("offers.popularDestinations")}</h2>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {
+          popularCounties.map((county) => (
+            <a
+              href={`${localizePath("/offers", locale)}?county=${county.slug}`}
+              class="rounded-2xl border border-slate-100 bg-white p-5 text-center shadow-sm hover:shadow-md"
+            >
+              <div class="font-display text-lg font-semibold text-charcoal">{county.name}</div>
+              <div class="mt-1 text-sm text-slate-muted">{county.count}</div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Data + i18n strings for the client-side filter engine -->
+  <script type="application/json" id="offers-summary-data" set:html={JSON.stringify(offerSummaries(locale))} />
+  <script type="application/json" id="offers-category-icons" set:html={JSON.stringify(categoryIcon)} />
+  <script
+    type="application/json"
+    id="offers-i18n"
+    set:html={JSON.stringify({
+      viewMore: t("common.viewMore"),
+      noResults: t("offers.noResults"),
+      resultsCount: t("offers.resultsCount"),
+      previous: t("offers.previous"),
+      next: t("offers.next"),
+    })}
+  />
+  <script src="../scripts/offersFilter.client.ts"></script>
+</Layout>

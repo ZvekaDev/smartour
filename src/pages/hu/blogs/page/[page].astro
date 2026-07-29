@@ -1,0 +1,16 @@
+---
+import BlogsPage from "../../../../pagesShared/BlogsPage.astro";
+import { blogPosts } from "../../../../data/blog/posts";
+
+export function getStaticPaths() {
+  const PAGE_SIZE = 9;
+  const totalPages = Math.max(1, Math.ceil((blogPosts.length - 1) / PAGE_SIZE));
+  return Array.from({ length: totalPages - 1 }, (_, i) => ({
+    params: { page: String(i + 2) },
+  }));
+}
+
+const { page } = Astro.params;
+---
+
+<BlogsPage page={Number(page)} />

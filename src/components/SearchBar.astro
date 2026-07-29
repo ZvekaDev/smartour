@@ -1,0 +1,30 @@
+---
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+
+interface Props {
+  action?: string;
+}
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+const { action = localizePath("/offers", locale) } = Astro.props;
+---
+
+<form action={action} method="get" class="mx-auto flex max-w-xl items-center rounded-full bg-white p-1.5 pl-5 shadow-lg">
+  <input
+    type="text"
+    name="q"
+    placeholder={t("search.placeholder")}
+    class="w-full border-0 bg-transparent text-charcoal placeholder:text-slate-400 focus:outline-none"
+  />
+  <button
+    type="submit"
+    aria-label={t("search.placeholder")}
+    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-coral text-white transition-colors hover:bg-coral-dark"
+  >
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+      <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+</form>

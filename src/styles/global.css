@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette, matched against the reference site's computed styles.
+     Tailwind's built-in slate-50/200 already match the reference footer
+     bg/borders exactly, so only the brand-specific colors are added here. */
+  --color-coral: #da5c57;
+  --color-coral-dark: #c14a45;
+  --color-charcoal: #212529;
+  --color-slate-muted: #475569;
+  --color-brand-blue: #0d6efd;
+
+  --font-heading: "Raleway", sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  --font-body: "Open Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+}

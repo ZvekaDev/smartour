@@ -1,0 +1,23 @@
+---
+import "leaflet/dist/leaflet.css";
+
+interface Props {
+  lat: number;
+  lng: number;
+  title: string;
+}
+
+const { lat, lng, title } = Astro.props;
+---
+
+<div
+  data-map
+  data-lat={lat}
+  data-lng={lng}
+  data-title={title}
+  class="h-80 w-full overflow-hidden rounded-2xl border border-slate-100 bg-slate-100"
+  role="img"
+  aria-label={title}
+>
+</div>
+<script src="../scripts/map.client.ts"></script>

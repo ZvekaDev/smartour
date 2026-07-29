@@ -1,0 +1,398 @@
+{
+  "en": {
+    "hero": {
+      "title": "Transport",
+      "subtitle": "Plan your cross-border journey with the best transport options across the region"
+    },
+    "quickCards": [
+      {
+        "icon": "bi bi-train-front",
+        "anchor": "#section-train",
+        "title": "Rail Transport",
+        "text": "Trains and international departures"
+      },
+      {
+        "icon": "bi bi-bus-front",
+        "anchor": "#section-bus",
+        "title": "Bus Transport",
+        "text": "Intercity and regional lines"
+      },
+      {
+        "icon": "bi bi-sign-turn-right",
+        "anchor": "#section-border",
+        "title": "Border Crossings",
+        "text": "Road conditions and waiting times"
+      },
+      {
+        "icon": "bi bi-map",
+        "anchor": "#section-tourism",
+        "title": "Tourism Organizations",
+        "text": "Local travel and routes"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "section-train",
+        "icon": "bi bi-train-front",
+        "title": "1. Rail Transport (Train)",
+        "subtitle": "The train has become the primary option for crossing the border, especially on the Subotica–Szeged route.",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.srbvoz.rs",
+            "text": "Serbia Train (Timetable)",
+            "description": "Main website for checking trains within Vojvodina (Novi Sad, Subotica, Sombor, Vršac) and international departures to Hungary."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.mavcsoport.hu",
+            "text": "MÁV-csoport (Hungarian Railways)",
+            "description": "Essential for traveling in southern Hungary (Szeged, Pécs, Kiskunhalas). The website has an excellent English version and a ticket purchase app."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://emma.mvkzrt.hu",
+            "text": "EMMA (Hungary Integrated Timetable)",
+            "description": "A new system combining trains and buses in Hungary, ideal for planning routes from the border to smaller towns."
+          }
+        ]
+      },
+      {
+        "id": "section-bus",
+        "icon": "bi bi-bus-front",
+        "title": "2. Bus Transport and Transfers",
+        "subtitle": "Buses remain the most flexible option for places not on the rail line (e.g., Banat or smaller villages in Bačka).",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.polazak.rs",
+            "text": "Polazak.rs",
+            "description": "The best bus route search engine in Serbia and Vojvodina."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.volanbusz.hu",
+            "text": "Volánbusz",
+            "description": "The main Hungarian intercity bus carrier. Excellent for routes like Szeged–Pécs or Szeged–Baja."
+          }
+        ]
+      },
+      {
+        "id": "section-border",
+        "icon": "bi bi-sign-turn-right",
+        "title": "3. Border Crossings and Road Conditions",
+        "subtitle": "If you are traveling by your own transport, traffic information is key, as there are often waits at Horgoš and Kelebija.",
+        "links": [
+          {
+            "icon": "bi bi-camera-video",
+            "href": "https://www.amss.rs/kamere",
+            "text": "AMSS (Live Cameras)",
+            "description": "Real-time footage from the Serbian side of the border."
+          },
+          {
+            "icon": "bi bi-clock-history",
+            "href": "https://www.borderwait.com",
+            "text": "BorderWait (App)",
+            "description": "A user app (and website) where travelers report current waiting times at all crossings (including small crossings like Bački Vinogradi or Čala)."
+          },
+          {
+            "icon": "bi bi-shield-check",
+            "href": "https://www.police.hu/hatarinfo",
+            "text": "Police.hu (Rendőrség)",
+            "description": "Official data from the Hungarian police on border conditions (Határinfó)."
+          }
+        ]
+      },
+      {
+        "id": "section-tourism",
+        "icon": "bi bi-map",
+        "title": "4. Tourism Organizations (Local Travel)",
+        "subtitle": "For ideas on where to go and how to get around within the regions:",
+        "links": [
+          {
+            "icon": "bi bi-compass",
+            "href": "https://www.vojvodinatravel.com",
+            "text": "Vojvodina Travel",
+            "description": "Official portal with maps, cycling routes and information about tourist trains (e.g., \"Romantika\")."
+          },
+          {
+            "icon": "bi bi-geo-alt",
+            "href": "https://www.visitszeged.hu",
+            "text": "Visit Szeged",
+            "description": "Everything about transport within Szeged (trams, trolleybuses) and the surrounding area."
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "Need Help Planning Your Trip?",
+      "text": "Browse our travel offers or get in touch with our team for personalized advice.",
+      "primaryText": "Browse Offers",
+      "secondaryText": "Contact Us"
+    }
+  },
+  "sr": {
+    "hero": {
+      "title": "Prevoz",
+      "subtitle": "Planirajte svoje prekogranično putovanje sa najboljim opcijama prevoza u regionu"
+    },
+    "quickCards": [
+      {
+        "icon": "bi bi-train-front",
+        "anchor": "#section-train",
+        "title": "Železnički saobraćaj",
+        "text": "Vozovi i međunarodni polasci"
+      },
+      {
+        "icon": "bi bi-bus-front",
+        "anchor": "#section-bus",
+        "title": "Autobuski prevoz",
+        "text": "Međugradske i regionalne linije"
+      },
+      {
+        "icon": "bi bi-sign-turn-right",
+        "anchor": "#section-border",
+        "title": "Granični prelazi",
+        "text": "Stanje na putevima i čekanje"
+      },
+      {
+        "icon": "bi bi-map",
+        "anchor": "#section-tourism",
+        "title": "Turističke organizacije",
+        "text": "Lokalno kretanje i rute"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "section-train",
+        "icon": "bi bi-train-front",
+        "title": "1. Železnički saobraćaj (Voz)",
+        "subtitle": "Voz je postao primarna opcija za prelazak granice, posebno na relaciji Subotica–Segedin.",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.srbvoz.rs",
+            "text": "Srbija Voz (Red vožnje)",
+            "description": "Glavni sajt za proveru vozova unutar Vojvodine (Novi Sad, Subotica, Sombor, Vršac) i međunarodnih polazaka ka Mađarskoj."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.mavcsoport.hu",
+            "text": "MÁV-csoport (Mađarske železnice)",
+            "description": "Neophodan za putovanja po južnoj Mađarskoj (Segedin, Pečuj, Kiškunhalas). Sajt ima odličnu englesku verziju i aplikaciju za kupovinu karata."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://emma.mvkzrt.hu",
+            "text": "EMMA (Integrisani red vožnje Mađarske)",
+            "description": "Novi sistem koji objedinjuje vozove i autobuse u Mađarskoj, idealan za planiranje ruta od granice do manjih mesta."
+          }
+        ]
+      },
+      {
+        "id": "section-bus",
+        "icon": "bi bi-bus-front",
+        "title": "2. Autobuski prevoz i transferi",
+        "subtitle": "Autobusi su i dalje najfleksibilnija opcija za mesta koja nisu na pruzi (npr. Banat ili manja sela u Bačkoj).",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.polazak.rs",
+            "text": "Polazak.rs",
+            "description": "Najbolji pretraživač autobuskih linija u Srbiji i Vojvodini."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.volanbusz.hu",
+            "text": "Volánbusz",
+            "description": "Glavni mađarski međugradski autobuski prevoznik. Odličan za rute poput Segedin–Pečuj ili Segedin–Baja."
+          }
+        ]
+      },
+      {
+        "id": "section-border",
+        "icon": "bi bi-sign-turn-right",
+        "title": "3. Granični prelazi i stanje na putevima",
+        "subtitle": "Ako putujete sopstvenim prevozom, informacije o gužvama su ključne, jer se na Horgošu i Kelebiji često čeka.",
+        "links": [
+          {
+            "icon": "bi bi-camera-video",
+            "href": "https://www.amss.rs/kamere",
+            "text": "AMSS (Kamere uživo)",
+            "description": "Snimci sa srpske strane granice u realnom vremenu."
+          },
+          {
+            "icon": "bi bi-clock-history",
+            "href": "https://www.borderwait.com",
+            "text": "BorderWait (Aplikacija)",
+            "description": "Korisnička aplikacija (i sajt) gde putnici prijavljuju trenutno vreme čekanja na svim prelazima (uključujući i male prelaze kao što su Bački Vinogradi ili Čala)."
+          },
+          {
+            "icon": "bi bi-shield-check",
+            "href": "https://www.police.hu/hatarinfo",
+            "text": "Police.hu (Rendőrség)",
+            "description": "Zvanični podaci mađarske policije o stanju na granicama (Határinfó)."
+          }
+        ]
+      },
+      {
+        "id": "section-tourism",
+        "icon": "bi bi-map",
+        "title": "4. Turističke organizacije (Lokalno kretanje)",
+        "subtitle": "Za ideje gde otići i kako se kretati unutar samih regija:",
+        "links": [
+          {
+            "icon": "bi bi-compass",
+            "href": "https://www.vojvodinatravel.com",
+            "text": "Vojvodina Travel",
+            "description": "Zvanični portal sa mapama, biciklističkim rutama i informacijama o turističkim vozovima (npr. „Romantika\")."
+          },
+          {
+            "icon": "bi bi-geo-alt",
+            "href": "https://www.visitszeged.hu",
+            "text": "Visit Szeged",
+            "description": "Sve o transportu unutar Segedina (tramvaji, trolejbusi) i okoline."
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "Potrebna vam je pomoć u planiranju putovanja?",
+      "text": "Pregledajte naše turističke ponude ili nas kontaktirajte za personalizovane savete.",
+      "primaryText": "Pregledajte ponude",
+      "secondaryText": "Kontaktirajte nas"
+    }
+  },
+  "hu": {
+    "hero": {
+      "title": "Közlekedés",
+      "subtitle": "Tervezze meg határokon átnyúló utazását a régió legjobb közlekedési lehetőségeivel"
+    },
+    "quickCards": [
+      {
+        "icon": "bi bi-train-front",
+        "anchor": "#section-train",
+        "title": "Vasúti közlekedés",
+        "text": "Vonatok és nemzetközi indulások"
+      },
+      {
+        "icon": "bi bi-bus-front",
+        "anchor": "#section-bus",
+        "title": "Autóbusz-közlekedés",
+        "text": "Távolsági és regionális járatok"
+      },
+      {
+        "icon": "bi bi-sign-turn-right",
+        "anchor": "#section-border",
+        "title": "Határátkelők",
+        "text": "Útviszonyok és várakozási idők"
+      },
+      {
+        "icon": "bi bi-map",
+        "anchor": "#section-tourism",
+        "title": "Turisztikai szervezetek",
+        "text": "Helyi közlekedés és útvonalak"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "section-train",
+        "icon": "bi bi-train-front",
+        "title": "1. Vasúti közlekedés (Vonat)",
+        "subtitle": "A vonat lett az elsődleges lehetőség a határátlépésre, különösen a Szabadka–Szeged útvonalon.",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.srbvoz.rs",
+            "text": "Srbija Voz (Menetrend)",
+            "description": "A fő weboldal a vajdasági vonatok ellenőrzéséhez (Újvidék, Szabadka, Zombor, Versec) és a Magyarország felé tartó nemzetközi indulásokhoz."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.mavcsoport.hu",
+            "text": "MÁV-csoport (Magyar Államvasutak)",
+            "description": "Elengedhetetlen a dél-magyarországi utazásokhoz (Szeged, Pécs, Kiskunhalas). A weboldalnak kiváló angol verziója és jegyvásárlási alkalmazása van."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://emma.mvkzrt.hu",
+            "text": "EMMA (Magyarország integrált menetrend)",
+            "description": "Új rendszer, amely egyesíti a vonatokat és buszokat Magyarországon, ideális a határtól kisebb városokig tartó útvonalak tervezéséhez."
+          }
+        ]
+      },
+      {
+        "id": "section-bus",
+        "icon": "bi bi-bus-front",
+        "title": "2. Autóbusz-közlekedés és transzferek",
+        "subtitle": "Az autóbuszok továbbra is a legrugalmasabb lehetőséget jelentik a vasútvonaltól távoli helyekre (pl. Bánát vagy a Bácska kisebb falvai).",
+        "links": [
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.polazak.rs",
+            "text": "Polazak.rs",
+            "description": "A legjobb autóbuszjárat-kereső Szerbiában és Vajdaságban."
+          },
+          {
+            "icon": "bi bi-globe2",
+            "href": "https://www.volanbusz.hu",
+            "text": "Volánbusz",
+            "description": "A fő magyar távolsági autóbusz-szolgáltató. Kiváló útvonalakhoz, mint Szeged–Pécs vagy Szeged–Baja."
+          }
+        ]
+      },
+      {
+        "id": "section-border",
+        "icon": "bi bi-sign-turn-right",
+        "title": "3. Határátkelők és útviszonyok",
+        "subtitle": "Ha saját járművel utazik, a forgalmi információk kulcsfontosságúak, mivel Horgosnál és Kelebiánál gyakran várakozni kell.",
+        "links": [
+          {
+            "icon": "bi bi-camera-video",
+            "href": "https://www.amss.rs/kamere",
+            "text": "AMSS (Élő kamerák)",
+            "description": "Valós idejű felvételek a határ szerb oldaláról."
+          },
+          {
+            "icon": "bi bi-clock-history",
+            "href": "https://www.borderwait.com",
+            "text": "BorderWait (Alkalmazás)",
+            "description": "Felhasználói alkalmazás (és weboldal), ahol az utazók jelentik az aktuális várakozási időt minden átkelőnél (beleértve a kisebb átkelőket is, mint Bački Vinogradi vagy Csála)."
+          },
+          {
+            "icon": "bi bi-shield-check",
+            "href": "https://www.police.hu/hatarinfo",
+            "text": "Police.hu (Rendőrség)",
+            "description": "A magyar rendőrség hivatalos adatai a határhelyzétről (Határinfó)."
+          }
+        ]
+      },
+      {
+        "id": "section-tourism",
+        "icon": "bi bi-map",
+        "title": "4. Turisztikai szervezetek (Helyi közlekedés)",
+        "subtitle": "Ötletek, hová menjen és hogyan közlekedjen a régiókon belül:",
+        "links": [
+          {
+            "icon": "bi bi-compass",
+            "href": "https://www.vojvodinatravel.com",
+            "text": "Vojvodina Travel",
+            "description": "Hivatalos portál térképekkel, kerékpáros útvonalakkal és turisztikai vonatokról szóló információkkal (pl. „Romantika\")."
+          },
+          {
+            "icon": "bi bi-geo-alt",
+            "href": "https://www.visitszeged.hu",
+            "text": "Visit Szeged",
+            "description": "Minden a szegedi közlekedésről (villamosok, trolibuszok) és a környékről."
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "Segítségre van szüksége az utazás tervezéséhez?",
+      "text": "Böngéssze turisztikai ajánlatainkat, vagy lépjen kapcsolatba csapatunkkal személyre szabott tanácsokért.",
+      "primaryText": "Ajánlatok böngészése",
+      "secondaryText": "Kapcsolatfelvétel"
+    }
+  }
+}

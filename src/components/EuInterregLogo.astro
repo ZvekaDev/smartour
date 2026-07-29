@@ -1,0 +1,37 @@
+---
+/**
+ * Typographic recreation of the "Interreg IPA Hungary-Serbia — Co-funded by
+ * the European Union" lockup used on the reference site.
+ *
+ * NOTE: this is a placeholder built from the public-domain EU flag design
+ * (12 gold stars on blue, per EU emblem guidelines) plus recreated text —
+ * it is NOT the official Interreg artwork file. Swap in the real logo asset
+ * supplied by the Interreg IPA Hungary-Serbia programme authority before
+ * launch; official co-funding logos usually have mandatory exact usage
+ * rules (proportions, clear space, wording).
+ */
+const stars = Array.from({ length: 12 });
+---
+
+<a href="https://www.hungary-serbia.eu" class="flex items-center gap-2" aria-label="Interreg IPA Hungary-Serbia — Co-funded by the European Union">
+  <svg viewBox="0 0 60 40" class="h-8 w-auto shrink-0" role="img" aria-hidden="true">
+    <rect width="60" height="40" fill="#003399" />
+    <g fill="#FFCC00">
+      {stars.map((_, i) => {
+        const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+        const cx = 30 + 14 * Math.cos(angle);
+        const cy = 20 + 14 * Math.sin(angle);
+        return (
+          <circle cx={cx} cy={cy} r="1.6" />
+        );
+      })}
+    </g>
+  </svg>
+  <span class="leading-tight">
+    <span class="block font-display text-[15px] font-extrabold text-[#003399]">Interreg</span>
+    <span class="block text-[11px] font-bold text-[#003399]">IPA Hungary - Serbia</span>
+  </span>
+  <span class="ml-1 hidden text-[10px] leading-tight text-[#003399] sm:block">
+    Co-funded by<br />the European Union
+  </span>
+</a>

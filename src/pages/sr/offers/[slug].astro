@@ -1,0 +1,15 @@
+---
+import OfferDetailPage from "../../../pagesShared/OfferDetailPage.astro";
+import { offers } from "../../../lib/offers";
+
+export function getStaticPaths() {
+  return offers.map((offer) => ({
+    params: { slug: offer.slugs.sr },
+    props: { offer },
+  }));
+}
+
+const { offer } = Astro.props;
+---
+
+<OfferDetailPage offer={offer} />

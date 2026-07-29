@@ -1,0 +1,112 @@
+---
+import EuInterregLogo from "./EuInterregLogo.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const navItems = [
+  { path: "/", key: "nav.home" },
+  { path: "/offers", key: "nav.offers" },
+  { path: "/blogs", key: "nav.blogs" },
+  { path: "/about-us", key: "nav.about" },
+  { path: "/transport", key: "nav.transport" },
+  { path: "/contact", key: "nav.contact" },
+] as const;
+
+// Strip the locale prefix so we can compare against navItems' plain paths.
+const currentPath = Astro.url.pathname.replace(new RegExp(`^/${locale}`), "") || "/";
+---
+
+<header class="sticky top-0 z-30 bg-white">
+  <!-- Top bar: EU/Interreg lockup | divider | SMARTour wordmark -->
+  <div class="border-b border-slate-100">
+    <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <EuInterregLogo />
+      <span class="h-10 w-px bg-coral/40" aria-hidden="true"></span>
+      <a href={localizePath("/", locale)} class="font-display text-2xl font-bold text-coral">
+        SMARTour
+      </a>
+    </div>
+  </div>
+
+  <!-- Nav row -->
+  <div class="border-b border-slate-100">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <nav aria-label={t("a11y.mainNav")} class="hidden md:block">
+        <ul class="flex items-center gap-7 text-[15px] font-medium text-charcoal">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={localizePath(item.path, locale)}
+                  class:list={[
+                    "transition-colors hover:text-coral-dark",
+                    currentPath === item.path && "text-coral-dark",
+                  ]}
+                  aria-current={currentPath === item.path ? "page" : undefined}
+                >
+                  {t(item.key)}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <button
+        type="button"
+        class="md:hidden"
+        aria-label={t("a11y.toggleNav")}
+        aria-expanded="false"
+        data-mobile-nav-toggle
+      >
+        <svg class="h-6 w-6 text-charcoal" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+
+      <div class="hidden md:block">
+        <LanguageSwitcher />
+      </div>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <nav
+      id="mobile-nav"
+      aria-label={t("a11y.mobileNav")}
+      class="hidden border-t border-slate-100 px-4 pb-4 md:hidden"
+      data-mobile-nav
+    >
+      <ul class="flex flex-col gap-3 pt-3 text-[15px] font-medium text-charcoal">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={localizePath(item.path, locale)}
+                class:list={["block py-1", currentPath === item.path && "text-coral-dark"]}
+                aria-current={currentPath === item.path ? "page" : undefined}
+              >
+                {t(item.key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-3">
+        <LanguageSwitcher />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector("[data-mobile-nav-toggle]");
+  const panel = document.querySelector("[data-mobile-nav]");
+  toggle?.addEventListener("click", () => {
+    const isOpen = !panel?.classList.contains("hidden");
+    panel?.classList.toggle("hidden", isOpen);
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+</script>

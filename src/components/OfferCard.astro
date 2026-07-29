@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { offerHref, categoryIcon, countyName, type Offer } from "../lib/offers";
+
+interface Props {
+  offer: Offer;
+}
+
+const { offer } = Astro.props;
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+const icon = categoryIcon[offer.category] ?? "📍";
+const location = countyName(offer.countySlug, locale) || offer.countrySlug;
+---
+
+<a href={offerHref(offer, locale)} class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-md">
+  <div class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
+    <span aria-hidden="true">{icon}</span>
+  </div>
+  <div class="flex flex-1 flex-col p-4">
+    <h3 class="line-clamp-2 font-display text-base font-semibold text-charcoal">{offer.title[locale]}</h3>
+    <p class="mt-1 flex items-center gap-1 text-sm text-slate-muted">
+      <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" />
+        <circle cx="12" cy="9.5" r="2.2" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+      {location}
+    </p>
+    <span class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-coral-dark px-4 py-2 text-sm font-medium text-white transition-colors group-hover:brightness-90">
+      {t("common.viewMore")}
+    </span>
+  </div>
+</a>

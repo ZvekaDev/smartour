@@ -1,0 +1,987 @@
+{
+  "categories": [
+    {
+      "slug": "events-and-festivals",
+      "names": {
+        "en": "Events and festivals",
+        "sr": "Dogadjaji i festivali",
+        "hu": "Események és fesztiválok"
+      }
+    },
+    {
+      "slug": "religious-and-spiritual-tourism",
+      "names": {
+        "en": "Religious and spiritual tourism",
+        "sr": "Religijski i duhovni turizam",
+        "hu": "Vallási és spirituális turizmus"
+      }
+    },
+    {
+      "slug": "educational-and-research-tourism",
+      "names": {
+        "en": "Educational and research tourism",
+        "sr": "Edukativni i istraživački turizam",
+        "hu": "Oktatási és kutatási turizmus"
+      }
+    },
+    {
+      "slug": "restaurants",
+      "names": {
+        "en": "Restaurants",
+        "sr": "Restorani",
+        "hu": "Éttermek"
+      }
+    },
+    {
+      "slug": "industrial-and-technical-heritage",
+      "names": {
+        "en": "Industrial and technical heritage",
+        "sr": "Industrijsko i tehničko nasleđe",
+        "hu": "Ipari és műszaki örökség"
+      }
+    },
+    {
+      "slug": "active-and-sports-tourism",
+      "names": {
+        "en": "Active and sports tourism",
+        "sr": "Aktivni i sportski turizam",
+        "hu": "Aktív és sportturizmus"
+      }
+    },
+    {
+      "slug": "food-and-wine-producers",
+      "names": {
+        "en": "Food and wine producers",
+        "sr": "Proizvođači hrane i vina",
+        "hu": "Élelmiszer- és bortermelők"
+      }
+    },
+    {
+      "slug": "creative-and-experience-based-tourism",
+      "names": {
+        "en": "Creative and experience-based tourism",
+        "sr": "Kreativni i doživljajni turizam",
+        "hu": "Kreatív és élményalapú turizmus"
+      }
+    },
+    {
+      "slug": "health-and-wellness-tourism",
+      "names": {
+        "en": "Health and wellness tourism",
+        "sr": "Zdravstveni i velnes turizam",
+        "hu": "Egészség- és wellness turizmus"
+      }
+    },
+    {
+      "slug": "eco-and-sustainable-tourism-initiatives",
+      "names": {
+        "en": "Eco and sustainable tourism initiatives",
+        "sr": "Eko i održive turističke inicijative",
+        "hu": "Öko és fenntartható turisztikai kezdeményezések"
+      }
+    },
+    {
+      "slug": "tourism-information-infrastructure",
+      "names": {
+        "en": "Tourism information infrastructure",
+        "sr": "Turistička informaciona infrastruktura",
+        "hu": "Turisztikai információs infrastruktúra"
+      }
+    },
+    {
+      "slug": "smart-mobility-and-green-transport",
+      "names": {
+        "en": "Smart mobility and green transport",
+        "sr": "Pametna mobilnost i zeleni transport",
+        "hu": "Okos mobilitás és zöld közlekedés"
+      }
+    }
+  ],
+  "countries": [
+    {
+      "slug": "serbia",
+      "names": {
+        "en": "Serbia",
+        "sr": "Srbija",
+        "hu": "Szerbia"
+      }
+    }
+  ],
+  "counties": [
+    {
+      "slug": "serbia-south-backa",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "South Bačka",
+        "sr": "Južnobački okrug",
+        "hu": "Dél-Bácska"
+      }
+    },
+    {
+      "slug": "serbia-north-backa",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "North Bačka",
+        "sr": "Severnobački okrug",
+        "hu": "Észak-Bácska"
+      }
+    },
+    {
+      "slug": "serbia-central-banat",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "Central Banat",
+        "sr": "Centralni Banat",
+        "hu": "Közép-Bánát"
+      }
+    },
+    {
+      "slug": "serbia-south-banat",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "South Banat",
+        "sr": "Južnobanatski okrug",
+        "hu": "Dél-Bánát"
+      }
+    },
+    {
+      "slug": "serbia-west-backa",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "West Bačka",
+        "sr": "Zapadnobanatski okrug",
+        "hu": "Nyugat-Bánát"
+      }
+    },
+    {
+      "slug": "serbia-srem",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "Srem",
+        "sr": "Srem",
+        "hu": "Szerémség"
+      }
+    },
+    {
+      "slug": "serbia-north-banat",
+      "countrySlug": "serbia",
+      "names": {
+        "en": "North Banat",
+        "sr": "Severnobanatski okrug",
+        "hu": "Észak-Bánát"
+      }
+    }
+  ],
+  "towns": [
+    {
+      "slug": "serbia-south-backa-novi-sad",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Novi Sad",
+        "sr": "Novi Sad",
+        "hu": "Novi Sad"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-subotica",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Subotica",
+        "sr": "Subotica",
+        "hu": "Subotica"
+      }
+    },
+    {
+      "slug": "serbia-central-banat-zrenjanin",
+      "countySlug": "serbia-central-banat",
+      "names": {
+        "en": "Zrenjanin",
+        "sr": "Zrenjanin",
+        "hu": "Zrenjanin"
+      }
+    },
+    {
+      "slug": "serbia-central-banat-kikinda",
+      "countySlug": "serbia-central-banat",
+      "names": {
+        "en": "Kikinda",
+        "sr": "Kikinda",
+        "hu": "Kikinda"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-kacarevo",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Kačarevo",
+        "sr": "Kačarevo",
+        "hu": "Kačarevo"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-sombor",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Sombor",
+        "sr": "Sombor",
+        "hu": "Sombor"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-apatin",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Apatin",
+        "sr": "Apatin",
+        "hu": "Apatin"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-kovacica",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Kovačica",
+        "sr": "Kovačica",
+        "hu": "Kovačica"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-sremski-karlovci",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Sremski Karlovci",
+        "sr": "Sremski Karlovci",
+        "hu": "Sremski Karlovci"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-vrsac",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Vršac",
+        "sr": "Vršac",
+        "hu": "Vršac"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-senta",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Senta",
+        "sr": "Senta",
+        "hu": "Senta"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-pancevo",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Pančevo",
+        "sr": "Pančevo",
+        "hu": "Pančevo"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-palic",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Palić",
+        "sr": "Palić",
+        "hu": "Palić"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-mali-i-os",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Mali Iđoš",
+        "sr": "Mali Iđoš",
+        "hu": "Mali Iđoš"
+      }
+    },
+    {
+      "slug": "serbia-srem-erdevik",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Erdevik",
+        "sr": "Erdevik",
+        "hu": "Erdevik"
+      }
+    },
+    {
+      "slug": "serbia-srem-krusedol-selo",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Krušedol Selo",
+        "sr": "Krušedol Selo",
+        "hu": "Krušedol Selo"
+      }
+    },
+    {
+      "slug": "serbia-srem-grgeteg",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Grgeteg",
+        "sr": "Grgeteg",
+        "hu": "Grgeteg"
+      }
+    },
+    {
+      "slug": "serbia-srem-irig",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Irig",
+        "sr": "Irig",
+        "hu": "Irig"
+      }
+    },
+    {
+      "slug": "serbia-srem-jazak",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Jazak",
+        "sr": "Jazak",
+        "hu": "Jazak"
+      }
+    },
+    {
+      "slug": "serbia-srem-ruma",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Ruma",
+        "sr": "Ruma",
+        "hu": "Ruma"
+      }
+    },
+    {
+      "slug": "serbia-srem-divos",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Divoš",
+        "sr": "Divoš",
+        "hu": "Divoš"
+      }
+    },
+    {
+      "slug": "serbia-north-banat-petrovaradin",
+      "countySlug": "serbia-north-banat",
+      "names": {
+        "en": "Petrovaradin",
+        "sr": "Petrovaradin",
+        "hu": "Petrovaradin"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-bo-ani",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Bođani",
+        "sr": "Bođani",
+        "hu": "Bođani"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-kovilj",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Kovilj",
+        "sr": "Kovilj",
+        "hu": "Kovilj"
+      }
+    },
+    {
+      "slug": "serbia-srem-vrdnik",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Vrdnik",
+        "sr": "Vrdnik",
+        "hu": "Vrdnik"
+      }
+    },
+    {
+      "slug": "serbia-srem-beocin",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Beočin",
+        "sr": "Beočin",
+        "hu": "Beočin"
+      }
+    },
+    {
+      "slug": "serbia-srem-sisatovac",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Šišatovac",
+        "sr": "Šišatovac",
+        "hu": "Šišatovac"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-bac",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Bač",
+        "sr": "Bač",
+        "hu": "Bač"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-mesic",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Mesić",
+        "sr": "Mesić",
+        "hu": "Mesić"
+      }
+    },
+    {
+      "slug": "serbia-central-banat-ecka",
+      "countySlug": "serbia-central-banat",
+      "names": {
+        "en": "Ečka",
+        "sr": "Ečka",
+        "hu": "Ečka"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-srbobran",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Srbobran",
+        "sr": "Srbobran",
+        "hu": "Srbobran"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-becej",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Bečej",
+        "sr": "Bečej",
+        "hu": "Bečej"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-sremska-kamenica",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Sremska Kamenica",
+        "sr": "Sremska Kamenica",
+        "hu": "Sremska Kamenica"
+      }
+    },
+    {
+      "slug": "serbia-srem-pecinci",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Pećinci",
+        "sr": "Pećinci",
+        "hu": "Pećinci"
+      }
+    },
+    {
+      "slug": "serbia-srem-zasavica",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Zasavica",
+        "sr": "Zasavica",
+        "hu": "Zasavica"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-deliblato",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Deliblato",
+        "sr": "Deliblato",
+        "hu": "Deliblato"
+      }
+    },
+    {
+      "slug": "serbia-central-banat-carska-bara",
+      "countySlug": "serbia-central-banat",
+      "names": {
+        "en": "Carska bara",
+        "sr": "Carska bara",
+        "hu": "Carska bara"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-cenej",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Čenej",
+        "sr": "Čenej",
+        "hu": "Čenej"
+      }
+    },
+    {
+      "slug": "serbia-north-banat-rusko-selo",
+      "countySlug": "serbia-north-banat",
+      "names": {
+        "en": "Rusko Selo",
+        "sr": "Rusko Selo",
+        "hu": "Rusko Selo"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-odzaci",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Odžaci",
+        "sr": "Odžaci",
+        "hu": "Odžaci"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-crvenka",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Crvenka",
+        "sr": "Crvenka",
+        "hu": "Crvenka"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-bezdan",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Bezdan",
+        "sr": "Bezdan",
+        "hu": "Bezdan"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-mali-stapar",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Mali Stapar",
+        "sr": "Mali Stapar",
+        "hu": "Mali Stapar"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-titel",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Titel",
+        "sr": "Titel",
+        "hu": "Titel"
+      }
+    },
+    {
+      "slug": "serbia-central-banat-tomasevac",
+      "countySlug": "serbia-central-banat",
+      "names": {
+        "en": "Tomaševac",
+        "sr": "Tomaševac",
+        "hu": "Tomaševac"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-kulpin",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Kulpin",
+        "sr": "Kulpin",
+        "hu": "Kulpin"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-kovin",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Kovin",
+        "sr": "Kovin",
+        "hu": "Kovin"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-entry-point-near-backi-breg",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Entry Point -Near Bački Breg",
+        "sr": "Entry Point -Near Bački Breg",
+        "hu": "Entry Point -Near Bački Breg"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-apatin-sombor",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Apatin-Sombor",
+        "sr": "Apatin-Sombor",
+        "hu": "Apatin-Sombor"
+      }
+    },
+    {
+      "slug": "serbia-srem-mala-remeta",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Mala Remeta",
+        "sr": "Mala Remeta",
+        "hu": "Mala Remeta"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-banostor",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Banoštor",
+        "sr": "Banoštor",
+        "hu": "Banoštor"
+      }
+    },
+    {
+      "slug": "serbia-srem-novi-slankamen",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Novi Slankamen",
+        "sr": "Novi Slankamen",
+        "hu": "Novi Slankamen"
+      }
+    },
+    {
+      "slug": "serbia-srem-rivica",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Rivica",
+        "sr": "Rivica",
+        "hu": "Rivica"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-cerevic",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Čerević",
+        "sr": "Čerević",
+        "hu": "Čerević"
+      }
+    },
+    {
+      "slug": "serbia-srem-surduk",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Surduk",
+        "sr": "Surduk",
+        "hu": "Surduk"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-rakovac",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Rakovac",
+        "sr": "Rakovac",
+        "hu": "Rakovac"
+      }
+    },
+    {
+      "slug": "serbia-srem-veliki-radinci",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Veliki Radinci",
+        "sr": "Veliki Radinci",
+        "hu": "Veliki Radinci"
+      }
+    },
+    {
+      "slug": "serbia-srem-krcedin",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Krčedin",
+        "sr": "Krčedin",
+        "hu": "Krčedin"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-backi-vinogradi",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Bački Vinogradi",
+        "sr": "Bački Vinogradi",
+        "hu": "Bački Vinogradi"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-hajdukovo",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Hajdukovo",
+        "sr": "Hajdukovo",
+        "hu": "Hajdukovo"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-gudurica",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Gudurica",
+        "sr": "Gudurica",
+        "hu": "Gudurica"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-veliko-srediste",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Veliko Središte",
+        "sr": "Veliko Središte",
+        "hu": "Veliko Središte"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-backa-topola",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Bačka Topola",
+        "sr": "Bačka Topola",
+        "hu": "Bačka Topola"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-temerin",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Temerin",
+        "sr": "Temerin",
+        "hu": "Temerin"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-banatski-karlovac",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Banatski Karlovac",
+        "sr": "Banatski Karlovac",
+        "hu": "Banatski Karlovac"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-petrovaradin-novi-sad",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Petrovaradin (Novi Sad)",
+        "sr": "Petrovaradin (Novi Sad)",
+        "hu": "Petrovaradin (Novi Sad)"
+      }
+    },
+    {
+      "slug": "serbia-srem-ledinci",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Ledinci",
+        "sr": "Ledinci",
+        "hu": "Ledinci"
+      }
+    },
+    {
+      "slug": "serbia-srem-paragovo",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Paragovo",
+        "sr": "Paragovo",
+        "hu": "Paragovo"
+      }
+    },
+    {
+      "slug": "serbia-srem-velika-remeta",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Velika Remeta",
+        "sr": "Velika Remeta",
+        "hu": "Velika Remeta"
+      }
+    },
+    {
+      "slug": "serbia-srem-sremska-mitrovica",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Sremska Mitrovica",
+        "sr": "Sremska Mitrovica",
+        "hu": "Sremska Mitrovica"
+      }
+    },
+    {
+      "slug": "serbia-north-banat-ada",
+      "countySlug": "serbia-north-banat",
+      "names": {
+        "en": "Ada",
+        "sr": "Ada",
+        "hu": "Ada"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-backi-petrovac",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Bački Petrovac",
+        "sr": "Bački Petrovac",
+        "hu": "Bački Petrovac"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-pacir",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Pačir",
+        "sr": "Pačir",
+        "hu": "Pačir"
+      }
+    },
+    {
+      "slug": "serbia-srem-bacinci",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Bačinci",
+        "sr": "Bačinci",
+        "hu": "Bačinci"
+      }
+    },
+    {
+      "slug": "serbia-srem-in-ija",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Inđija",
+        "sr": "Inđija",
+        "hu": "Inđija"
+      }
+    },
+    {
+      "slug": "serbia-srem-novi-banovci",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Novi Banovci",
+        "sr": "Novi Banovci",
+        "hu": "Novi Banovci"
+      }
+    },
+    {
+      "slug": "serbia-north-banat-mokrin",
+      "countySlug": "serbia-north-banat",
+      "names": {
+        "en": "Mokrin",
+        "sr": "Mokrin",
+        "hu": "Mokrin"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-supljak",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Šupljak",
+        "sr": "Šupljak",
+        "hu": "Šupljak"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-backi-monostor",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Bački Monoštor",
+        "sr": "Bački Monoštor",
+        "hu": "Bački Monoštor"
+      }
+    },
+    {
+      "slug": "serbia-srem-obrez",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Obrež",
+        "sr": "Obrež",
+        "hu": "Obrež"
+      }
+    },
+    {
+      "slug": "serbia-south-backa-backa-palanka",
+      "countySlug": "serbia-south-backa",
+      "names": {
+        "en": "Bačka Palanka",
+        "sr": "Bačka Palanka",
+        "hu": "Bačka Palanka"
+      }
+    },
+    {
+      "slug": "serbia-srem-zasavica-ii",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Zasavica II",
+        "sr": "Zasavica II",
+        "hu": "Zasavica II"
+      }
+    },
+    {
+      "slug": "serbia-srem-fruska-gora",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Fruška Gora",
+        "sr": "Fruška Gora",
+        "hu": "Fruška Gora"
+      }
+    },
+    {
+      "slug": "serbia-north-backa-feketic",
+      "countySlug": "serbia-north-backa",
+      "names": {
+        "en": "Feketić",
+        "sr": "Feketić",
+        "hu": "Feketić"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-stapar-kod-sombora",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Stapar (kod Sombora)",
+        "sr": "Stapar (kod Sombora)",
+        "hu": "Stapar (kod Sombora)"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-banatsko-novo-selo",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Banatsko Novo Selo",
+        "sr": "Banatsko Novo Selo",
+        "hu": "Banatsko Novo Selo"
+      }
+    },
+    {
+      "slug": "serbia-srem-sid",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Šid",
+        "sr": "Šid",
+        "hu": "Šid"
+      }
+    },
+    {
+      "slug": "serbia-south-banat-banatski-brestovac",
+      "countySlug": "serbia-south-banat",
+      "names": {
+        "en": "Banatski Brestovac",
+        "sr": "Banatski Brestovac",
+        "hu": "Banatski Brestovac"
+      }
+    },
+    {
+      "slug": "serbia-srem-kuzmin",
+      "countySlug": "serbia-srem",
+      "names": {
+        "en": "Kuzmin",
+        "sr": "Kuzmin",
+        "hu": "Kuzmin"
+      }
+    },
+    {
+      "slug": "serbia-west-backa-deronje",
+      "countySlug": "serbia-west-backa",
+      "names": {
+        "en": "Deronje",
+        "sr": "Deronje",
+        "hu": "Deronje"
+      }
+    }
+  ]
+}

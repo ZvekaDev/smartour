@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+import { blogPosts } from "../data/blog/posts";
+
+const PAGE_SIZE = 9;
+
+interface Props {
+  page?: number;
+}
+
+const { page = 1 } = Astro.props;
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Newest first.
+const sorted = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
+const [featured, ...rest] = sorted;
+
+const totalPages = Math.max(1, Math.ceil(rest.length / PAGE_SIZE));
+const start = (page - 1) * PAGE_SIZE;
+const pagePosts = rest.slice(start, start + PAGE_SIZE);
+
+function pageHref(p: number) {
+  const base = localizePath("/blogs", locale);
+  return p === 1 ? base : `${base}/page/${p}`;
+}
+---
+
+<Layout title={t("blog.heroTitle")}>
+  <Hero title={t("blog.heroTitle")} subtitle={t("blog.heroSubtitle")} gradient="from-emerald-900 via-slate-800 to-coral-dark" compact />
+
+  <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    {
+      featured && page === 1 && (
+        <div class="mb-14">
+          <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{t("blog.featured")}</h2>
+          <BlogCard post={featured} size="lg" />
+        </div>
+      )
+    }
+
+    <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{t("blog.allPosts")}</h2>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {pagePosts.map((post) => <BlogCard post={post} />)}
+    </div>
+
+    {
+      totalPages > 1 && (
+        <nav aria-label={t("a11y.pagination")} class="mt-10 flex items-center justify-center gap-1.5">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <a
+              href={pageHref(p)}
+              class:list={[
+                "rounded-full px-3 py-1.5 text-sm",
+                p === page ? "bg-coral text-white" : "text-charcoal hover:bg-slate-100",
+              ]}
+              aria-current={p === page ? "page" : undefined}
+            >
+              {p}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+  </section>
+</Layout>

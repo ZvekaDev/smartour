@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npm create *)",
+      "Bash(ls -la /Users/dejanzvekic/.npm/_cacache/content-v2/sha512/be/ 2>&1 | head -20; whoami; stat -f \"%Su %Sg\" /Users/dejanzvekic/.npm/_cacache/content-v2/sha512/be/a3 2>&1)",
+      "Bash(npm_config_cache=\"/private/tmp/claude-501/-Users-dejanzvekic-Documents-Claude-Code-First-Project/5cec9621-be79-4f2b-aa79-cfbf873c50df/scratchpad/npm-cache\" npm create astro@latest . -- --template minimal --install --no-git --typescript strict --yes)",
+      "Bash(mv agreeable-altitude/.gitignore agreeable-altitude/.vscode ./)",
+      "Bash(rm -f agreeable-altitude/.DS_Store)",
+      "Bash(mv agreeable-altitude/* .)",
+      "Bash(rmdir agreeable-altitude *)",
+      "Bash(npm_config_cache=\"/private/tmp/claude-501/-Users-dejanzvekic-Documents-Claude-Code-First-Project/5cec9621-be79-4f2b-aa79-cfbf873c50df/scratchpad/npm-cache\" npx astro add tailwind --yes)",
+      "Bash(npm run *)",
+      "Bash(curl -sS -D - -o /dev/null \"https://smarttourism.concordsofttest.com/Home/ChangeLanguage?lang=sr\" -c /tmp/smartour-cookies.txt)",
+      "Read(//tmp/**)",
+      "Bash(curl -sS -D - -o /dev/null -L -H 'Referer: https://smarttourism.concordsofttest.com/offers' -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' 'https://smarttourism.concordsofttest.com/Home/ChangeLanguage?lang=sr&returnUrl=%2Foffers' -c /tmp/smartour-cookies.txt -b /tmp/smartour-cookies.txt)",
+      "Bash(curl -sS -X POST https://smarttourism.concordsofttest.com/api/Deals -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' -H 'Referer: https://smarttourism.concordsofttest.com/offers' -d '{\"language\":\"en\",\"searchTitle\":\"\",\"filters\":[],\"sorts\":[],\"page\":1,\"pageSize\":1000}' -o /tmp/deals-en.json -w 'HTTP %{http_code}, size %{size_download} bytes\\\\n')",
+      "Bash(python3 -c ' *)",
+      "Bash(npm_config_cache=\"/private/tmp/claude-501/-Users-dejanzvekic-Documents-Claude-Code-First-Project/5cec9621-be79-4f2b-aa79-cfbf873c50df/scratchpad/npm-cache\" npm install -D cheerio)",
+      "Bash(curl -sS https://smarttourism.concordsofttest.com/transport/ -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' -o /tmp/transport-en.html -w 'HTTP %{http_code}, size %{size_download} bytes\\\\n')",
+      "Bash(rm -f /tmp/st-cookies.txt)",
+      "Bash(curl -sS -D - -o /dev/null -L -H 'Referer: https://smarttourism.concordsofttest.com/transport/' -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' 'https://smarttourism.concordsofttest.com/Home/ChangeLanguage?lang=hu&returnUrl=%2Ftransport%2F' -c /tmp/st-cookies.txt -b /tmp/st-cookies.txt)",
+      "Bash(curl -sS -b /tmp/st-cookies.txt -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' https://smarttourism.concordsofttest.com/transport/ -o /tmp/transport-hu.html -w 'HTTP %{http_code}\\\\n')",
+      "Bash(curl -sS -b /tmp/st-cookies.txt -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' https://smarttourism.concordsofttest.com/hu/kozlekedes -o /tmp/transport-hu.html -w 'HTTP %{http_code}\\\\n')",
+      "Bash(rm -f /tmp/st-cookies-sr.txt)",
+      "Bash(curl -sS -D - -o /dev/null -L -H 'Referer: https://smarttourism.concordsofttest.com/transport/' -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' 'https://smarttourism.concordsofttest.com/Home/ChangeLanguage?lang=sr&returnUrl=%2Ftransport%2F' -c /tmp/st-cookies-sr.txt -b /tmp/st-cookies-sr.txt)",
+      "Bash(curl -sS -b /tmp/st-cookies-sr.txt -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' https://smarttourism.concordsofttest.com/sr/prevoz -o /tmp/transport-sr.html -w 'HTTP %{http_code}\\\\n')",
+      "Bash(node -e ' *)",
+      "Bash(node scripts/migrate-offers.mjs)",
+      "Bash(node scripts/migrate-transport.mjs)",
+      "Bash(curl -sS https://smarttourism.concordsofttest.com/ -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0 Safari/537.36' -o /tmp/home-en.html -w 'HTTP %{http_code}, size %{size_download}\\\\n')",
+      "Bash(npm_config_cache=\"/private/tmp/claude-501/-Users-dejanzvekic-Documents-Claude-Code-First-Project/5cec9621-be79-4f2b-aa79-cfbf873c50df/scratchpad/npm-cache\" npm install leaflet)",
+      "Bash(npm_config_cache=\"/private/tmp/claude-501/-Users-dejanzvekic-Documents-Claude-Code-First-Project/5cec9621-be79-4f2b-aa79-cfbf873c50df/scratchpad/npm-cache\" npm install -D @types/leaflet)",
+      "Bash(grep -oE '>[A-Za-z][a-zA-Z ]{3,40}<')",
+      "Bash(astro dev *)",
+      "Bash(gh --version)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

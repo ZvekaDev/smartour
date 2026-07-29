@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import OfferCard from "../components/OfferCard.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+import { offers } from "../lib/offers";
+import { blogPosts } from "../data/blog/posts";
+import { aboutUs } from "../data/aboutUs";
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const featuredOffers = offers.slice(0, 4);
+const [bigPost, ...restPosts] = blogPosts;
+const smallPost = restPosts[0];
+const gridPosts = restPosts.slice(1, 4);
+---
+
+<Layout title={t("home.hero.title")}>
+  <Hero
+    tagline={t("home.hero.tagline")}
+    title={t("home.hero.title")}
+    subtitle={t("home.hero.subtitle")}
+    showSearch
+  />
+
+  <!-- Featured offers -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mb-8 flex items-center justify-between">
+      <h2 class="font-display text-2xl font-bold text-charcoal">{t("home.offers.heading")}</h2>
+      <a
+        href={localizePath("/offers", locale)}
+        class="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-charcoal hover:border-coral hover:text-coral"
+      >
+        {t("common.viewAll")} →
+      </a>
+    </div>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {featuredOffers.map((offer) => <OfferCard offer={offer} />)}
+    </div>
+  </section>
+
+  <!-- Stories and blogs teaser -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="mb-8 font-display text-2xl font-bold text-charcoal">{t("home.stories.heading")}</h2>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div class="md:col-span-2">
+        <BlogCard post={bigPost} size="lg" />
+      </div>
+      <BlogCard post={smallPost} />
+    </div>
+    <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      {gridPosts.map((post) => <BlogCard post={post} />)}
+    </div>
+    <div class="mt-8 text-center">
+      <a
+        href={localizePath("/blogs", locale)}
+        class="inline-block rounded-full border border-slate-200 px-5 py-2.5 text-sm font-medium text-charcoal hover:border-coral hover:text-coral"
+      >
+        {t("common.viewAll")} →
+      </a>
+    </div>
+  </section>
+
+  <!-- About Us teaser -->
+  <section class="bg-slate-50 py-16">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-wide text-coral">
+          {aboutUs.whoWeAreTagline[locale]}
+        </span>
+        <h2 class="mt-2 font-display text-2xl font-bold text-charcoal sm:text-3xl">{aboutUs.heroTitle[locale]}</h2>
+        {
+          aboutUs.whoWeAreParagraphs[locale].map((p) => (
+            <p class="mt-4 text-slate-muted">{p}</p>
+          ))
+        }
+        <div class="mt-6 flex gap-8">
+          {
+            aboutUs.stats.map((stat) => (
+              <div>
+                <div class="font-display text-2xl font-bold text-coral">{stat.number}</div>
+                <div class="text-sm text-slate-muted">{stat.label[locale]}</div>
+              </div>
+            ))
+          }
+        </div>
+        <a
+          href={localizePath("/about-us", locale)}
+          class="mt-8 inline-flex items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-sm font-semibold text-white hover:bg-coral-dark"
+        >
+          {t("common.moreAboutUs")} →
+        </a>
+      </div>
+      <div class="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-coral/15 via-brand-blue/10 to-slate-100 text-8xl">
+        🌍
+      </div>
+    </div>
+  </section>
+
+  <!-- Join the community CTA -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-charcoal via-slate-800 to-coral-dark py-20 text-center text-white">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading text-3xl font-bold">{t("home.join.heading")}</h2>
+      <p class="mt-4 text-white/85">{t("home.join.text")}</p>
+      <a
+        href={localizePath("/about-us", locale)}
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-100"
+      >
+        {t("common.moreAboutUs")} →
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,46 @@
+---
+import SearchBar from "./SearchBar.astro";
+
+interface Props {
+  tagline?: string;
+  title: string;
+  subtitle?: string;
+  showSearch?: boolean;
+  gradient?: string; // Tailwind gradient utility classes
+  compact?: boolean;
+}
+
+const {
+  tagline,
+  title,
+  subtitle,
+  showSearch = false,
+  gradient = "from-slate-900 via-slate-800 to-coral-dark",
+  compact = false,
+} = Astro.props;
+---
+
+<section class:list={["relative overflow-hidden bg-gradient-to-br text-white", gradient, compact ? "py-16" : "py-24 sm:py-32"]}>
+  <!-- Decorative topography-style overlay, no third-party imagery involved -->
+  <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-10" aria-hidden="true">
+    <defs>
+      <pattern id="hero-dots" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.4" fill="white" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#hero-dots)" />
+  </svg>
+
+  <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+    {
+      tagline && (
+        <span class="mb-4 inline-block rounded-full bg-white/15 px-4 py-1 text-xs font-semibold uppercase tracking-wide backdrop-blur-sm">
+          {tagline}
+        </span>
+      )
+    }
+    <h1 class="font-heading text-4xl font-bold sm:text-5xl">{title}</h1>
+    {subtitle && <p class="mt-4 text-lg text-white/85">{subtitle}</p>}
+    {showSearch && <div class="mt-8"><SearchBar /></div>}
+  </div>
+</section>
