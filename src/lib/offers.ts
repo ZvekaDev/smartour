@@ -1,10 +1,15 @@
-import offersData from "../data/generated/offers.json";
-import taxonomyData from "../data/generated/taxonomy.json";
-import { extraCategories } from "../data/categoriesExtra";
+import { sanityClient, urlForImage } from "./sanity";
 import type { Locale } from "../i18n/ui";
+import type { Image } from "sanity";
+
+export interface OfferVideo {
+  type: "embed" | "file";
+  url: string;
+  caption: string | null;
+}
 
 export interface Offer {
-  id: number;
+  id: string;
   slugs: Record<Locale, string>;
   category: string;
   countrySlug: string;
@@ -22,7 +27,8 @@ export interface Offer {
   facebook: string | null;
   instagram: string | null;
   tiktok: string | null;
-  sourceImageUrl: string | null;
+  photos: (Image & { alt?: string })[];
+  videos: OfferVideo[];
 }
 
 interface TaxonomyEntry {
@@ -30,21 +36,82 @@ interface TaxonomyEntry {
   names: Record<Locale, string>;
 }
 
+interface CategoryEntry extends TaxonomyEntry {
+  icon: string | null;
+}
+
 interface Taxonomy {
-  categories: TaxonomyEntry[];
+  categories: CategoryEntry[];
   countries: TaxonomyEntry[];
   counties: (TaxonomyEntry & { countrySlug: string })[];
   towns: (TaxonomyEntry & { countySlug: string })[];
 }
 
-export const offers = offersData as Offer[];
-export const taxonomy: Taxonomy = {
-  ...(taxonomyData as Taxonomy),
-  // Merge in categories from the original spec that have no live offers yet,
-  // so the filter UI can show them (with an empty state) rather than hiding
-  // them entirely.
-  categories: [...(taxonomyData as Taxonomy).categories, ...extraCategories],
-};
+const OFFERS_QUERY = /* groq */ `
+*[_type == "offer"] | order(title.en asc) {
+  "id": _id,
+  "slugs": {"en": slugs.en.current, "sr": slugs.sr.current, "hu": slugs.hu.current},
+  "category": category->slug.current,
+  "countrySlug": country->slug.current,
+  "countySlug": county->slug.current,
+  "townSlug": town->slug.current,
+  title,
+  description,
+  address,
+  zip,
+  "lat": location.lat,
+  "lng": location.lng,
+  phone, email, website, facebook, instagram, tiktok,
+  photos[]{..., alt},
+  videos[]{
+    _type,
+    url,
+    caption,
+    "fileUrl": file.asset->url
+  }
+}`;
+
+const CATEGORIES_QUERY = /* groq */ `*[_type == "category"] | order(names.en asc) {
+  "slug": slug.current, names, icon
+}`;
+const COUNTRIES_QUERY = /* groq */ `*[_type == "country"] { "slug": slug.current, names }`;
+const COUNTIES_QUERY = /* groq */ `*[_type == "county"] {
+  "slug": slug.current, names, "countrySlug": country->slug.current
+}`;
+const TOWNS_QUERY = /* groq */ `*[_type == "town"] {
+  "slug": slug.current, names, "countySlug": county->slug.current
+}`;
+
+async function loadData(): Promise<{ offers: Offer[]; taxonomy: Taxonomy }> {
+  const [offersRaw, categories, countries, counties, towns] = await Promise.all([
+    sanityClient.fetch(OFFERS_QUERY),
+    sanityClient.fetch(CATEGORIES_QUERY),
+    sanityClient.fetch(COUNTRIES_QUERY),
+    sanityClient.fetch(COUNTIES_QUERY),
+    sanityClient.fetch(TOWNS_QUERY),
+  ]);
+
+  const offers: Offer[] = offersRaw.map((o: any) => ({
+    ...o,
+    photos: o.photos ?? [],
+    videos: (o.videos ?? []).map((v: any) => ({
+      type: v._type === "videoEmbed" ? "embed" : "file",
+      url: v._type === "videoEmbed" ? v.url : v.fileUrl,
+      caption: v.caption ?? null,
+    })),
+  }));
+
+  return { offers, taxonomy: { categories, countries, counties, towns } };
+}
+
+// Top-level await: resolved once per build (this module is a singleton across
+// the whole `astro build`/`astro dev` process), so every page importing
+// `offers`/`taxonomy` below reuses the same already-fetched data — no
+// per-page network round trips.
+const { offers, taxonomy: taxonomyData } = await loadData();
+
+export { offers };
+export const taxonomy: Taxonomy = taxonomyData;
 
 export function offerHref(offer: Offer, locale: Locale): string {
   const base = locale === "en" ? "/offers" : `/${locale}/offers`;
@@ -74,7 +141,7 @@ export function countryName(slug: string, locale: Locale): string {
 }
 
 export interface OfferSummary {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   category: string;
@@ -89,9 +156,8 @@ export interface OfferSummary {
 /**
  * A lightweight, locale-specific index used to drive the client-side filter
  * engine on the Offers page. Deliberately excludes descriptions/contact
- * fields (~1.5MB across all locales in the full dataset) — those stay in
- * the statically-generated detail pages, which is also better for SEO than
- * shipping everything into one client bundle.
+ * fields — those stay in the statically-generated detail pages, which is
+ * also better for SEO than shipping everything into one client bundle.
  */
 export function offerSummaries(locale: Locale): OfferSummary[] {
   return offers.map((o) => ({
@@ -108,25 +174,9 @@ export function offerSummaries(locale: Locale): OfferSummary[] {
   }));
 }
 
-/** Category slug -> Bootstrap-style icon key, used to pick a placeholder graphic. */
-export const categoryIcon: Record<string, string> = {
-  "events-and-festivals": "🎉",
-  "religious-and-spiritual-tourism": "⛪",
-  "educational-and-research-tourism": "🎓",
-  restaurants: "🍽️",
-  "industrial-and-technical-heritage": "🏭",
-  "active-and-sports-tourism": "🚴",
-  "food-and-wine-producers": "🍷",
-  "creative-and-experience-based-tourism": "🎨",
-  "health-and-wellness-tourism": "💆",
-  "eco-and-sustainable-tourism-initiatives": "🌿",
-  "tourism-information-infrastructure": "ℹ️",
-  "smart-mobility-and-green-transport": "🚲",
-  // Categories with no live entries yet, kept so the taxonomy/UI stays ready for them.
-  "digital-and-smart-infrastructure": "📡",
-  "accessible-tourism-infrastructure": "♿",
-  "local-crafts-and-intangible-heritage": "🧵",
-  "cross-border-routes-and-twin-offers": "🌉",
-  "film-induced-tourism-locations": "🎬",
-  accommodations: "🛏️",
-};
+/** Category slug -> emoji, sourced from the category document in Sanity. */
+export const categoryIcon: Record<string, string> = Object.fromEntries(
+  taxonomy.categories.map((c) => [c.slug, c.icon ?? "📍"]),
+);
+
+export { urlForImage };

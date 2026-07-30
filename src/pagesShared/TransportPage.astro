@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getLangFromUrl, localizePath } from "../i18n/utils";
-import transportData from "../data/generated/transport.json";
+import transportData from "../lib/transport";
 
 const locale = getLangFromUrl(Astro.url);
 const data = transportData[locale];

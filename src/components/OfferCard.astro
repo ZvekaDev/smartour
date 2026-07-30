@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { offerHref, categoryIcon, countyName, type Offer } from "../lib/offers";
+import { offerHref, categoryIcon, countyName, urlForImage, type Offer } from "../lib/offers";
 
 interface Props {
   offer: Offer;
@@ -11,11 +11,16 @@ const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
 const icon = categoryIcon[offer.category] ?? "📍";
 const location = countyName(offer.countySlug, locale) || offer.countrySlug;
+const thumbnail = offer.photos[0] ? urlForImage(offer.photos[0]).width(480).height(360).fit("crop").url() : null;
 ---
 
 <a href={offerHref(offer, locale)} class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-md">
-  <div class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
-    <span aria-hidden="true">{icon}</span>
+  <div class="flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
+    {thumbnail ? (
+      <img src={thumbnail} alt={offer.title[locale]} loading="lazy" class="h-full w-full object-cover" />
+    ) : (
+      <span aria-hidden="true">{icon}</span>
+    )}
   </div>
   <div class="flex flex-1 flex-col p-4">
     <h3 class="line-clamp-2 font-display text-base font-semibold text-charcoal">{offer.title[locale]}</h3>

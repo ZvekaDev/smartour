@@ -1,21 +1,30 @@
-# SMARTour
+# CLAUDE.md
 
-A trilingual (EN/SR/HU) tourism site for the SMARTour EU Interreg IPA Hungary–Serbia
-cross-border project, built with Astro to replace an existing WordPress site
-(`https://smarttourism.concordsofttest.com`). That WordPress site is a **read-only
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+SMARTour: a trilingual (EN/SR/HU) tourism site for the SMARTour EU Interreg IPA
+Hungary–Serbia cross-border project, built with Astro to replace an existing WordPress
+site (`https://smarttourism.concordsofttest.com`). That WordPress site is a **read-only
 reference only** — never write to it, never modify it. It's used purely to match visual
 design (header/footer/nav) and, during initial migration, as a data source via its own
 JSON API.
 
-## Development
-
-When starting the dev server, use background mode:
+## Commands
 
 ```
-astro dev --background
+npm run dev        # dev server at localhost:4321
+npm run build       # production build to ./dist/
+npm run preview     # preview the production build locally
+npm run astro ...   # Astro CLI (e.g. `npm run astro check`)
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+When starting the dev server for a background task, use `astro dev --background`, then
+manage it with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+
+There is no lint or test script configured in `package.json` — don't invoke `npm run lint`
+or `npm test`.
 
 ## Tech stack
 
@@ -38,16 +47,44 @@ files (one per locale).
 i18n helpers live in `src/i18n/utils.ts` (`useTranslations`, `localizePath`, `formatDate`,
 `getLocalizedAlternate`) and the string dictionary is in `src/i18n/ui.ts`.
 
-## Data layer
+## Data layer: Sanity CMS
 
-Currently static JSON under `src/data/generated/` (offers, taxonomy, transport), generated
-by one-off scripts in `scripts/` that scraped the reference site's `/api/Deals` endpoint.
-**This is being migrated to Sanity CMS** — once that's live, `src/lib/offers.ts` and friends
-will fetch from Sanity instead of importing the static JSON. Do not hand-edit the generated
-JSON files; treat them as migration output only.
+All content (offers, taxonomy, blog posts, About Us, Transport, site settings) lives in
+**Sanity** (project `yrilioxt`, dataset `production`, public/read-without-token). The
+Studio is at `studio/` (a separate npm project — `cd studio && npm run dev`, serves on
+`localhost:3333`) with schema in `studio/schemaTypes/`. `aboutUs`, `transportPage` and
+`siteSettings` are singleton documents (fixed `_id`, one instance only — see
+`singletonTypes` in `studio/schemaTypes/index.ts` and the custom desk `structure` in
+`studio/sanity.config.ts`).
 
-Offers will support a photo gallery (multiple images) and a video gallery (multiple entries,
-each either a YouTube/Vimeo embed link or an uploaded file) once the Sanity schema lands.
+Astro reads via `src/lib/sanity.ts` (the `@sanity/client` instance + `urlForImage`) from
+these modules, each using a **top-level await** to fetch once per build/dev-server process
+and then export plain, already-resolved data — so every consumer still does a normal
+synchronous `import { offers, taxonomy } from "../lib/offers"` exactly as before the CMS
+migration, with no async changes needed at call sites:
+- `src/lib/offers.ts` — offers + taxonomy (categories/countries/counties/towns)
+- `src/data/aboutUs.ts`, `src/data/partners.ts`, `src/data/blog/posts.ts`, `src/lib/transport.ts`
+
+Because of that top-level-await pattern, **editing content requires either a Studio edit +
+dev server restart, or a rebuild** — the dev server does not hot-reload on remote Sanity
+changes (only on local file changes), so restart `npm run dev` after editing content in
+Studio to see it.
+
+Offers support a photo gallery (`offer.photos`, array of images) and a video gallery
+(`offer.videos`, each entry either a YouTube/Vimeo embed link or an uploaded file) — see
+`OfferDetailPage.astro` for the rendering (including the `toEmbedUrl` helper that turns a
+YouTube/Vimeo watch link into an iframe-embeddable one) and `OfferCard.astro` for the
+thumbnail fallback (first photo if present, else the emoji/gradient placeholder).
+
+`.env` (git-ignored, see `.env.example`) holds `SANITY_PROJECT_ID`, `SANITY_DATASET`, and
+`SANITY_API_TOKEN` (write-scoped, only needed for the migration script below — reads don't
+need it since the dataset is public).
+
+`scripts/migrate-to-sanity.mjs` is the one-off script that seeded Sanity from the old static
+JSON (`src/data/generated/*.json`, now unused by the app but kept as historical migration
+input) and `categoriesExtra.ts` (also migration-only now). It's idempotent — every document
+uses a deterministic `_id` and `createOrReplace`, so it's safe to re-run:
+`node --env-file=.env scripts/migrate-to-sanity.mjs`.
 
 ## Known gotchas
 
@@ -59,9 +96,6 @@ each either a YouTube/Vimeo embed link or an uploaded file) once the Sanity sche
 - Serbian dates: use `formatDate()` from `src/i18n/utils.ts`, not `toLocaleDateString('sr', ...)`
   directly — plain `'sr'` renders Cyrillic, but the rest of the SR UI is Latin script. The
   helper forces `sr-Latn`.
-- `categoriesExtra.ts` holds hand-translated categories that have zero live offers; it's
-  merged into taxonomy at read-time in `src/lib/offers.ts` so re-running the migration script
-  doesn't clobber them.
 
 ## Documentation
 
