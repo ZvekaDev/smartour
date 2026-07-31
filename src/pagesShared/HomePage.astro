@@ -104,8 +104,19 @@ const gridPosts = restPosts.slice(1, 4);
           {t("common.moreAboutUs")} →
         </a>
       </div>
-      <div class="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-coral/15 via-brand-blue/10 to-slate-100 text-8xl">
-        🌍
+      <div class="flex aspect-square items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-coral/15 via-brand-blue/10 to-slate-100 text-8xl">
+        {
+          aboutUs.heroImage ? (
+            <img
+              src={urlForImage(aboutUs.heroImage).width(900).height(900).fit("crop").url()}
+              alt={aboutUs.heroTitle[locale]}
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
+          ) : (
+            "🌍"
+          )
+        }
       </div>
     </div>
   </section>
