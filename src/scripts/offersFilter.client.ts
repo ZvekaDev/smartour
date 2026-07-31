@@ -16,6 +16,7 @@ interface OfferSummary {
   county: string;
   town: string;
   href: string;
+  thumbnail: string | null;
 }
 
 interface I18nStrings {
@@ -110,8 +111,12 @@ function init() {
     const location = offer.county || offer.countrySlug;
     return `
       <a href="${offer.href}" class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-md">
-        <div class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
-          <span aria-hidden="true">${icon}</span>
+        <div class="flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
+          ${
+            offer.thumbnail
+              ? `<img src="${offer.thumbnail}" alt="${offer.title}" loading="lazy" class="h-full w-full object-cover" />`
+              : `<span aria-hidden="true">${icon}</span>`
+          }
         </div>
         <div class="flex flex-1 flex-col p-4">
           <h3 class="line-clamp-2 font-display text-base font-semibold text-charcoal">${offer.title}</h3>

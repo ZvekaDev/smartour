@@ -151,6 +151,7 @@ export interface OfferSummary {
   county: string;
   town: string;
   href: string;
+  thumbnail: string | null;
 }
 
 /**
@@ -171,6 +172,7 @@ export function offerSummaries(locale: Locale): OfferSummary[] {
     county: countyName(o.countySlug, locale),
     town: townName(o.townSlug, locale),
     href: offerHref(o, locale),
+    thumbnail: o.photos[0] ? urlForImage(o.photos[0]).width(480).height(360).fit("crop").url() : null,
   }));
 }
 
