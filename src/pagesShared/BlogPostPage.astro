@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
 import { getLangFromUrl, useTranslations, localizePath, formatDate } from "../i18n/utils";
+import { urlForImage } from "../lib/sanity";
 import { blogPosts, type BlogPost } from "../data/blog/posts";
 
 interface Props {
@@ -13,11 +14,14 @@ const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
 
 const morePosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const coverUrl = post.coverImage ? urlForImage(post.coverImage).width(1600).height(700).fit("crop").url() : null;
 ---
 
 <Layout title={post.title[locale]} description={post.excerpt[locale]}>
-  <section class:list={["bg-gradient-to-br py-20 text-white", post.coverGradient]}>
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+  <section class:list={["relative overflow-hidden bg-gradient-to-br py-20 text-white", post.coverGradient]}>
+    {coverUrl && <img src={coverUrl} alt={post.title[locale]} class="absolute inset-0 h-full w-full object-cover" />}
+    {coverUrl && <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />}
+    <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <nav aria-label={t("a11y.breadcrumb")} class="mb-4 flex items-center gap-2 text-sm text-white/70">
         <a href={localizePath("/", locale)} class="hover:text-white">{t("nav.home")}</a>
         <span>/</span>

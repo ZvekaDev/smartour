@@ -1,10 +1,12 @@
 import { sanityClient } from "../../lib/sanity";
+import type { Image } from "sanity";
 
 export interface BlogPost {
   slug: string;
   category: string;
   author: string;
   date: string; // ISO date
+  coverImage: Image | null;
   coverGradient: string; // Tailwind gradient classes — used when there's no cover image
   title: Record<"en" | "sr" | "hu", string>;
   excerpt: Record<"en" | "sr" | "hu", string>;
@@ -17,6 +19,7 @@ const BLOG_POSTS_QUERY = /* groq */ `
   category,
   author,
   date,
+  coverImage,
   coverGradient,
   title,
   excerpt,
