@@ -59,9 +59,15 @@ const relatedOffers = offers
 
 const googleMapsUrl =
   offer.lat && offer.lng ? `https://www.google.com/maps/search/?api=1&query=${offer.lat},${offer.lng}` : null;
+
+const alternates = {
+  en: offerHref(offer, "en"),
+  sr: offerHref(offer, "sr"),
+  hu: offerHref(offer, "hu"),
+};
 ---
 
-<Layout title={offer.title[locale]} description={offer.description[locale].slice(0, 160)}>
+<Layout title={offer.title[locale]} description={offer.description[locale].slice(0, 160)} alternates={alternates}>
   <!-- Header: gradient placeholder (no third-party imagery) + breadcrumb + title -->
   <section class="relative overflow-hidden bg-gradient-to-br from-charcoal via-slate-800 to-coral-dark py-16 text-white">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

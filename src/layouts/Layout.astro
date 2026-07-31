@@ -3,13 +3,21 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { getLangFromUrl } from "../i18n/utils";
+import type { Locale } from "../i18n/ui";
 
 interface Props {
   title: string;
   description?: string;
+  /** Per-locale href overrides for the language switcher, for pages whose path isn't
+   * a straight locale-prefix swap (e.g. offer detail pages with per-locale slugs). */
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { title, description = "SMARTour — cross-border tourism in the Hungary-Serbia region." } = Astro.props;
+const {
+  title,
+  description = "SMARTour — cross-border tourism in the Hungary-Serbia region.",
+  alternates,
+} = Astro.props;
 const locale = getLangFromUrl(Astro.url);
 ---
 
@@ -31,7 +39,7 @@ const locale = getLangFromUrl(Astro.url);
     />
   </head>
   <body class="flex min-h-screen flex-col bg-white text-charcoal">
-    <Header />
+    <Header alternates={alternates} />
     <main class="flex-1">
       <slot />
     </main>

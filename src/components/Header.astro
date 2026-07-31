@@ -2,7 +2,13 @@
 import EuInterregLogo from "./EuInterregLogo.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+import type { Locale } from "../i18n/ui";
 
+interface Props {
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { alternates } = Astro.props;
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
 
@@ -68,7 +74,7 @@ const currentPath = Astro.url.pathname.replace(new RegExp(`^/${locale}`), "") ||
       </button>
 
       <div class="hidden md:block">
-        <LanguageSwitcher />
+        <LanguageSwitcher alternates={alternates} />
       </div>
     </div>
 
@@ -95,7 +101,7 @@ const currentPath = Astro.url.pathname.replace(new RegExp(`^/${locale}`), "") ||
         }
       </ul>
       <div class="mt-3">
-        <LanguageSwitcher />
+        <LanguageSwitcher alternates={alternates} />
       </div>
     </nav>
   </div>

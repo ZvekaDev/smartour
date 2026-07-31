@@ -1,7 +1,14 @@
 ---
-import { locales, localeNames, localeFlags } from "../i18n/ui";
+import { locales, localeNames, localeFlags, type Locale } from "../i18n/ui";
 import { getLangFromUrl, getLocalizedAlternate } from "../i18n/utils";
 
+interface Props {
+  /** Per-locale href overrides for pages whose path isn't a straight locale-prefix
+   * swap (e.g. offer detail pages, where each locale has its own slug). */
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { alternates } = Astro.props;
 const currentLocale = getLangFromUrl(Astro.url);
 ---
 
@@ -29,7 +36,7 @@ const currentLocale = getLangFromUrl(Astro.url);
       locales.map((locale) => (
         <li>
           <a
-            href={getLocalizedAlternate(Astro.url, locale)}
+            href={alternates?.[locale] ?? getLocalizedAlternate(Astro.url, locale)}
             class:list={[
               "flex items-center gap-2 px-3 py-2 text-sm hover:bg-slate-50",
               locale === currentLocale ? "font-semibold text-coral-dark" : "text-charcoal",
