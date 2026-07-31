@@ -11,7 +11,13 @@ export const sanityClient = createClient({
   apiVersion: "2024-01-01",
   // The "production" dataset is public, so reads don't need a token — keeps
   // the site build free of any secret dependency.
-  useCdn: true,
+  //
+  // useCdn is false on purpose: this site fetches Sanity data once per build
+  // (not per visitor request), so there's no request-volume reason to use the
+  // CDN, and the CDN's eventual-consistency lag was intermittently causing
+  // webhook-triggered builds (which can start within ~10s of a publish) to
+  // bake in stale content. The primary API is always strongly consistent.
+  useCdn: false,
 });
 
 const builder = imageUrlBuilder(sanityClient);
