@@ -4,7 +4,7 @@ import Hero from "../components/Hero.astro";
 import BlogCard from "../components/BlogCard.astro";
 import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 import { blogPosts } from "../data/blog/posts";
-import { pageHeroes } from "../data/partners";
+import { pageHeroes, blogsCopy } from "../data/partners";
 import { urlForImage } from "../lib/sanity";
 
 const PAGE_SIZE = 9;
@@ -16,6 +16,11 @@ interface Props {
 const { page = 1 } = Astro.props;
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+const heroTitle = blogsCopy?.heroTitle?.[locale] || t("blog.heroTitle");
+const heroSubtitle = blogsCopy?.heroSubtitle?.[locale] || t("blog.heroSubtitle");
+const featuredHeading = blogsCopy?.featuredHeading?.[locale] || t("blog.featured");
+const allPostsHeading = blogsCopy?.allPostsHeading?.[locale] || t("blog.allPosts");
 
 // Newest first.
 const sorted = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
@@ -31,10 +36,10 @@ function pageHref(p: number) {
 }
 ---
 
-<Layout title={t("blog.heroTitle")}>
+<Layout title={heroTitle}>
   <Hero
-    title={t("blog.heroTitle")}
-    subtitle={t("blog.heroSubtitle")}
+    title={heroTitle}
+    subtitle={heroSubtitle}
     gradient="from-emerald-900 via-slate-800 to-coral-dark"
     compact
     imageUrl={pageHeroes.blogs ? urlForImage(pageHeroes.blogs).width(1920).height(600).fit("crop").url() : null}
@@ -44,13 +49,13 @@ function pageHref(p: number) {
     {
       featured && page === 1 && (
         <div class="mb-14">
-          <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{t("blog.featured")}</h2>
+          <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{featuredHeading}</h2>
           <BlogCard post={featured} size="lg" />
         </div>
       )
     }
 
-    <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{t("blog.allPosts")}</h2>
+    <h2 class="mb-6 font-display text-2xl font-bold text-charcoal">{allPostsHeading}</h2>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {pagePosts.map((post) => <BlogCard post={post} />)}
     </div>

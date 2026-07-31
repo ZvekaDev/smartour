@@ -7,11 +7,19 @@ import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 import { offers } from "../lib/offers";
 import { blogPosts } from "../data/blog/posts";
 import { aboutUs } from "../data/aboutUs";
-import { pageHeroes } from "../data/partners";
+import { pageHeroes, homeCopy } from "../data/partners";
 import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+const heroTagline = homeCopy?.heroTagline?.[locale] || t("home.hero.tagline");
+const heroTitle = homeCopy?.heroTitle?.[locale] || t("home.hero.title");
+const heroSubtitle = homeCopy?.heroSubtitle?.[locale] || t("home.hero.subtitle");
+const offersHeading = homeCopy?.offersHeading?.[locale] || t("home.offers.heading");
+const storiesHeading = homeCopy?.storiesHeading?.[locale] || t("home.stories.heading");
+const joinHeading = homeCopy?.joinHeading?.[locale] || t("home.join.heading");
+const joinText = homeCopy?.joinText?.[locale] || t("home.join.text");
 
 const featuredOffers = offers.slice(0, 4);
 const [bigPost, ...restPosts] = blogPosts;
@@ -19,11 +27,11 @@ const smallPost = restPosts[0];
 const gridPosts = restPosts.slice(1, 4);
 ---
 
-<Layout title={t("home.hero.title")}>
+<Layout title={heroTitle}>
   <Hero
-    tagline={t("home.hero.tagline")}
-    title={t("home.hero.title")}
-    subtitle={t("home.hero.subtitle")}
+    tagline={heroTagline}
+    title={heroTitle}
+    subtitle={heroSubtitle}
     showSearch
     imageUrl={pageHeroes.home ? urlForImage(pageHeroes.home).width(1920).height(900).fit("crop").url() : null}
   />
@@ -31,7 +39,7 @@ const gridPosts = restPosts.slice(1, 4);
   <!-- Featured offers -->
   <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="mb-8 flex items-center justify-between">
-      <h2 class="font-display text-2xl font-bold text-charcoal">{t("home.offers.heading")}</h2>
+      <h2 class="font-display text-2xl font-bold text-charcoal">{offersHeading}</h2>
       <a
         href={localizePath("/offers", locale)}
         class="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-charcoal hover:border-coral hover:text-coral"
@@ -46,7 +54,7 @@ const gridPosts = restPosts.slice(1, 4);
 
   <!-- Stories and blogs teaser -->
   <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <h2 class="mb-8 font-display text-2xl font-bold text-charcoal">{t("home.stories.heading")}</h2>
+    <h2 class="mb-8 font-display text-2xl font-bold text-charcoal">{storiesHeading}</h2>
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
       <div class="md:col-span-2">
         <BlogCard post={bigPost} size="lg" />
@@ -105,8 +113,8 @@ const gridPosts = restPosts.slice(1, 4);
   <!-- Join the community CTA -->
   <section class="relative overflow-hidden bg-gradient-to-br from-charcoal via-slate-800 to-coral-dark py-20 text-center text-white">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-      <h2 class="font-heading text-3xl font-bold">{t("home.join.heading")}</h2>
-      <p class="mt-4 text-white/85">{t("home.join.text")}</p>
+      <h2 class="font-heading text-3xl font-bold">{joinHeading}</h2>
+      <p class="mt-4 text-white/85">{joinText}</p>
       <a
         href={localizePath("/about-us", locale)}
         class="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-charcoal shadow-sm hover:bg-slate-100"

@@ -2,31 +2,36 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { siteContact, socialLinks, pageHeroes } from "../data/partners";
+import { siteContact, socialLinks, pageHeroes, contactCopy } from "../data/partners";
 import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
 
+const heroTitle = contactCopy?.heroTitle?.[locale] || t("contact.heroTitle");
+const heroSubtitle = contactCopy?.heroSubtitle?.[locale] || t("contact.heroSubtitle");
+const formHeading = contactCopy?.formHeading?.[locale] || t("contact.formHeading");
+const formText = contactCopy?.formText?.[locale] || t("contact.formText");
+
 const infoCards = [
   {
     icon: "✉️",
-    title: t("contact.emailUs"),
-    text: t("contact.emailUsText"),
+    title: contactCopy?.emailCardTitle?.[locale] || t("contact.emailUs"),
+    text: contactCopy?.emailCardText?.[locale] || t("contact.emailUsText"),
     valueHref: `mailto:${siteContact.email}`,
     value: siteContact.email,
   },
   {
     icon: "📞",
-    title: t("contact.callUs"),
-    text: t("contact.callUsText"),
+    title: contactCopy?.callCardTitle?.[locale] || t("contact.callUs"),
+    text: contactCopy?.callCardText?.[locale] || t("contact.callUsText"),
     valueHref: `tel:${siteContact.phone.replace(/\s+/g, "")}`,
     value: siteContact.phone,
   },
   {
     icon: "📍",
-    title: t("contact.visitUs"),
-    text: t("contact.visitUsText"),
+    title: contactCopy?.visitCardTitle?.[locale] || t("contact.visitUs"),
+    text: contactCopy?.visitCardText?.[locale] || t("contact.visitUsText"),
     valueHref: null,
     value: siteContact.location[locale],
   },
@@ -43,10 +48,10 @@ const socialIcons: Record<string, string> = {
 };
 ---
 
-<Layout title={t("contact.heroTitle")} description={t("contact.heroSubtitle")}>
+<Layout title={heroTitle} description={heroSubtitle}>
   <Hero
-    title={t("contact.heroTitle")}
-    subtitle={t("contact.heroSubtitle")}
+    title={heroTitle}
+    subtitle={heroSubtitle}
     compact
     imageUrl={pageHeroes.contact ? urlForImage(pageHeroes.contact).width(1920).height(600).fit("crop").url() : null}
   />
@@ -74,8 +79,8 @@ const socialIcons: Record<string, string> = {
     </div>
 
     <div class="mx-auto mt-14 max-w-2xl">
-      <h2 class="font-display text-xl font-bold text-charcoal">{t("contact.formHeading")}</h2>
-      <p class="mt-2 text-slate-muted">{t("contact.formText")}</p>
+      <h2 class="font-display text-xl font-bold text-charcoal">{formHeading}</h2>
+      <p class="mt-2 text-slate-muted">{formText}</p>
 
       <!--
         No backend is wired up yet — this is a static site. Before launch,

@@ -4,11 +4,14 @@ import Hero from "../components/Hero.astro";
 import OfferCard from "../components/OfferCard.astro";
 import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 import { offers, taxonomy, offerSummaries, categoryIcon, countyName } from "../lib/offers";
-import { pageHeroes } from "../data/partners";
+import { pageHeroes, offersCopy } from "../data/partners";
 import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+const heroTitle = offersCopy?.heroTitle?.[locale] || t("offers.heroTitle");
+const heroSubtitle = offersCopy?.heroSubtitle?.[locale] || t("offers.heroSubtitle");
 
 const townsByCounty = new Map<string, typeof taxonomy.towns>();
 for (const town of taxonomy.towns) {
@@ -33,10 +36,10 @@ const popularCounties = [...countyOfferCounts.entries()]
   .map(([slug, count]) => ({ slug, count, name: countyName(slug, locale) }));
 ---
 
-<Layout title={t("offers.heroTitle")}>
+<Layout title={heroTitle}>
   <Hero
-    title={t("offers.heroTitle")}
-    subtitle={t("offers.heroSubtitle")}
+    title={heroTitle}
+    subtitle={heroSubtitle}
     showSearch
     compact
     imageUrl={pageHeroes.offers ? urlForImage(pageHeroes.offers).width(1920).height(600).fit("crop").url() : null}
