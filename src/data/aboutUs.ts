@@ -1,5 +1,6 @@
 import { sanityClient } from "../lib/sanity";
 import type { Locale } from "../i18n/ui";
+import type { Image } from "sanity";
 
 type L = Record<Locale, string>;
 
@@ -14,6 +15,7 @@ const ABOUT_US_QUERY = /* groq */ `*[_type == "aboutUs" && _id == "aboutUs"][0]`
 export const aboutUs: {
   heroTitle: L;
   heroSubtitle: L;
+  heroImage: Image | null;
   whoWeAreTagline: L;
   whoWeAreHeading: L;
   whoWeAreParagraphs: Record<Locale, string[]>;

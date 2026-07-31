@@ -2,7 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { siteContact, socialLinks } from "../data/partners";
+import { siteContact, socialLinks, pageHeroes } from "../data/partners";
+import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
@@ -43,7 +44,12 @@ const socialIcons: Record<string, string> = {
 ---
 
 <Layout title={t("contact.heroTitle")} description={t("contact.heroSubtitle")}>
-  <Hero title={t("contact.heroTitle")} subtitle={t("contact.heroSubtitle")} compact />
+  <Hero
+    title={t("contact.heroTitle")}
+    subtitle={t("contact.heroSubtitle")}
+    compact
+    imageUrl={pageHeroes.contact ? urlForImage(pageHeroes.contact).width(1920).height(600).fit("crop").url() : null}
+  />
 
   <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">

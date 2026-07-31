@@ -16,6 +16,13 @@ export const aboutUs = defineType({
   fields: [
     defineField({name: 'heroTitle', title: 'Hero title', type: 'localeString', group: 'hero'}),
     defineField({name: 'heroSubtitle', title: 'Hero subtitle', type: 'localeString', group: 'hero'}),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero background image',
+      type: 'image',
+      options: {hotspot: true},
+      group: 'hero',
+    }),
 
     defineField({name: 'whoWeAreTagline', title: 'Tagline', type: 'localeString', group: 'whoWeAre'}),
     defineField({name: 'whoWeAreHeading', title: 'Heading', type: 'localeString', group: 'whoWeAre'}),

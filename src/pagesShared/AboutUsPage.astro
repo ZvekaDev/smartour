@@ -3,13 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 import { aboutUs } from "../data/aboutUs";
+import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
+const heroImageUrl = aboutUs.heroImage ? urlForImage(aboutUs.heroImage).width(1920).height(700).fit("crop").url() : null;
 ---
 
 <Layout title={aboutUs.heroTitle[locale]} description={aboutUs.heroSubtitle[locale]}>
-  <Hero title={aboutUs.heroTitle[locale]} subtitle={aboutUs.heroSubtitle[locale]} />
+  <Hero title={aboutUs.heroTitle[locale]} subtitle={aboutUs.heroSubtitle[locale]} imageUrl={heroImageUrl} />
 
   <!-- Who We Are -->
   <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

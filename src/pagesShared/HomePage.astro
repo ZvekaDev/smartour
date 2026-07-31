@@ -7,6 +7,8 @@ import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 import { offers } from "../lib/offers";
 import { blogPosts } from "../data/blog/posts";
 import { aboutUs } from "../data/aboutUs";
+import { pageHeroes } from "../data/partners";
+import { urlForImage } from "../lib/sanity";
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
@@ -23,6 +25,7 @@ const gridPosts = restPosts.slice(1, 4);
     title={t("home.hero.title")}
     subtitle={t("home.hero.subtitle")}
     showSearch
+    imageUrl={pageHeroes.home ? urlForImage(pageHeroes.home).width(1920).height(900).fit("crop").url() : null}
   />
 
   <!-- Featured offers -->

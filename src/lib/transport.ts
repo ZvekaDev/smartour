@@ -1,5 +1,6 @@
 import { sanityClient } from "./sanity";
 import type { Locale } from "../i18n/ui";
+import type { Image } from "sanity";
 
 interface TransportLocaleData {
   hero: { title: string; subtitle: string };
@@ -19,6 +20,7 @@ const TRANSPORT_QUERY = /* groq */ `*[_type == "transportPage" && _id == "transp
 const doc: {
   heroTitle: Record<Locale, string>;
   heroSubtitle: Record<Locale, string>;
+  heroImage: Image | null;
   quickCards: { icon: string; anchor: string; title: Record<Locale, string>; text: Record<Locale, string> }[];
   blocks: {
     anchorId: string;
@@ -74,5 +76,8 @@ const transportData: Record<Locale, TransportLocaleData> = {
   sr: forLocale("sr"),
   hu: forLocale("hu"),
 };
+
+/** Locale-independent, so exported separately from the per-locale data above. */
+export const transportHeroImage = doc.heroImage;
 
 export default transportData;

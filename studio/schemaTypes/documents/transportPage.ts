@@ -14,6 +14,13 @@ export const transportPage = defineType({
   fields: [
     defineField({name: 'heroTitle', title: 'Title', type: 'localeString', group: 'hero'}),
     defineField({name: 'heroSubtitle', title: 'Subtitle', type: 'localeString', group: 'hero'}),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero background image',
+      type: 'image',
+      options: {hotspot: true},
+      group: 'hero',
+    }),
 
     defineField({
       name: 'quickCards',

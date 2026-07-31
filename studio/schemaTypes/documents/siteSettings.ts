@@ -7,6 +7,18 @@ export const siteSettings = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'pageHeroes',
+      title: 'Page hero background images',
+      description: 'Background photo for pages that don\'t have their own document (Home, Offers, Blogs, Contact — About Us and Transport have their own hero image field).',
+      type: 'object',
+      fields: [
+        {name: 'home', title: 'Home', type: 'image', options: {hotspot: true}},
+        {name: 'offers', title: 'Offers', type: 'image', options: {hotspot: true}},
+        {name: 'blogs', title: 'Blogs', type: 'image', options: {hotspot: true}},
+        {name: 'contact', title: 'Contact', type: 'image', options: {hotspot: true}},
+      ],
+    }),
+    defineField({
       name: 'siteContact',
       title: 'Site contact',
       type: 'object',
