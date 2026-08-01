@@ -1,0 +1,296 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import type { OfferVideo } from "../lib/offers";
+
+interface GalleryPhoto {
+  thumb: string;
+  full: string;
+  alt: string;
+}
+
+interface Props {
+  photos: GalleryPhoto[];
+  videos: OfferVideo[];
+  title: string;
+}
+
+const { photos, videos, title } = Astro.props;
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+/** Turns a YouTube/Vimeo watch link into its embeddable form; returns null for anything else. */
+function toEmbedUrl(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes("youtube.com")) {
+      const id = u.searchParams.get("v");
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : null;
+    }
+    if (u.hostname === "youtu.be") {
+      const id = u.pathname.slice(1);
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : null;
+    }
+    if (u.hostname.includes("vimeo.com")) {
+      const id = u.pathname.split("/").filter(Boolean)[0];
+      return id ? `https://player.vimeo.com/video/${id}?autoplay=1` : null;
+    }
+  } catch {
+    // not a valid URL — fall through
+  }
+  return null;
+}
+
+/** YouTube thumbnails are predictable from the video ID; Vimeo/file videos fall back to a play-icon tile. */
+function videoThumb(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes("youtube.com")) {
+      const id = u.searchParams.get("v");
+      return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+    }
+    if (u.hostname === "youtu.be") {
+      const id = u.pathname.slice(1);
+      return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+type MediaItem =
+  | { kind: "photo"; thumb: string; full: string; alt: string }
+  | {
+      kind: "video";
+      thumb: string | null;
+      caption: string | null;
+      videoType: "embed" | "file";
+      embedUrl: string | null;
+      fileUrl: string | null;
+      linkUrl: string;
+    };
+
+const media: MediaItem[] = [
+  ...photos.map((p): MediaItem => ({ kind: "photo", thumb: p.thumb, full: p.full, alt: p.alt })),
+  ...videos.map((v): MediaItem => {
+    const embedUrl = v.type === "embed" ? toEmbedUrl(v.url) : null;
+    return {
+      kind: "video",
+      thumb: v.type === "embed" ? videoThumb(v.url) : null,
+      caption: v.caption,
+      videoType: v.type,
+      embedUrl,
+      fileUrl: v.type === "file" ? v.url : null,
+      linkUrl: v.url,
+    };
+  }),
+];
+
+const mediaForClient = media.map((m, i) => ({
+  index: i,
+  kind: m.kind,
+  thumb: m.thumb,
+  full: m.kind === "photo" ? m.full : null,
+  alt: m.kind === "photo" ? m.alt : title,
+  embedUrl: m.kind === "video" ? m.embedUrl : null,
+  fileUrl: m.kind === "video" ? m.fileUrl : null,
+  linkUrl: m.kind === "video" ? m.linkUrl : null,
+  caption: m.kind === "video" ? m.caption : null,
+}));
+---
+
+{
+  media.length > 0 && (
+    <div class="mb-10" data-offer-gallery data-index="0">
+      <h2 class="mb-4 font-display text-xl font-bold text-charcoal">{t("offers.gallery")}</h2>
+
+      <script type="application/json" data-gallery-media set:html={JSON.stringify(mediaForClient)} />
+      <script
+        type="application/json"
+        data-gallery-i18n
+        set:html={JSON.stringify({
+          close: t("gallery.close"),
+          next: t("gallery.next"),
+          previous: t("gallery.previous"),
+          viewFullscreen: t("gallery.viewFullscreen"),
+          counter: t("gallery.counter"),
+          watchVideo: t("offers.watchVideo"),
+        })}
+      />
+
+      {/* Main frame */}
+      <div class="group relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-100 bg-slate-950" data-gallery-main-frame>
+        {media.map((m, i) => (
+          <div
+            class:list={["absolute inset-0", i === 0 ? "block" : "hidden"]}
+            data-gallery-slide={i}
+          >
+            {m.kind === "photo" ? (
+              <img src={m.full} alt={m.alt} loading={i === 0 ? "eager" : "lazy"} class="h-full w-full object-cover" />
+            ) : m.thumb ? (
+              <img src={m.thumb} alt={m.caption ?? title} loading="lazy" class="h-full w-full object-cover opacity-80" />
+            ) : (
+              <div class="h-full w-full bg-gradient-to-br from-slate-800 to-slate-950" />
+            )}
+            {m.kind === "video" && (
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg">
+                  <svg viewBox="0 0 24 24" class="ml-1 h-7 w-7 text-charcoal" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* Prev/next arrows on the main frame */}
+        {media.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label={t("gallery.previous")}
+              class="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-charcoal opacity-0 shadow-md transition-opacity hover:bg-white group-hover:opacity-100 focus-visible:opacity-100"
+              data-gallery-prev
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label={t("gallery.next")}
+              class="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-charcoal opacity-0 shadow-md transition-opacity hover:bg-white group-hover:opacity-100 focus-visible:opacity-100"
+              data-gallery-next
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </>
+        )}
+
+        {/* Expand-to-fullscreen button */}
+        <button
+          type="button"
+          aria-label={t("gallery.viewFullscreen")}
+          class="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm hover:bg-black/75"
+          data-gallery-open
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M9 4H5a1 1 0 0 0-1 1v4M15 4h4a1 1 0 0 1 1 1v4M9 20H5a1 1 0 0 1-1-1v-4M15 20h4a1 1 0 0 0 1-1v-4"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span data-gallery-counter-inline />
+        </button>
+      </div>
+
+      {/* Thumbnail strip */}
+      {media.length > 1 && (
+        <div class="mt-3 flex gap-2 overflow-x-auto pb-1" data-gallery-thumbs>
+          {media.map((m, i) => (
+            <button
+              type="button"
+              data-gallery-thumb={i}
+              aria-label={`${i + 1}`}
+              class:list={[
+                "relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-colors sm:w-24",
+                i === 0 ? "border-coral" : "border-transparent hover:border-slate-300",
+              ]}
+            >
+              {m.kind === "photo" ? (
+                <img src={m.thumb} alt="" loading="lazy" class="h-full w-full object-cover" />
+              ) : m.thumb ? (
+                <img src={m.thumb} alt="" loading="lazy" class="h-full w-full object-cover" />
+              ) : (
+                <div class="h-full w-full bg-slate-800" />
+              )}
+              {m.kind === "video" && (
+                <span class="absolute inset-0 flex items-center justify-center bg-black/25">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Lightbox */}
+      <div
+        class="fixed inset-0 z-50 hidden flex-col bg-black/95 backdrop-blur-sm"
+        data-gallery-lightbox
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="flex items-center justify-between px-4 py-3 text-white sm:px-6">
+          <span class="text-sm text-white/70" data-gallery-counter />
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              class="hidden h-9 items-center gap-1 rounded-full bg-white/10 px-3 text-xs font-medium hover:bg-white/20 sm:flex"
+              data-gallery-zoom-out
+              aria-label="Zoom out"
+            >
+              −
+            </button>
+            <button
+              type="button"
+              class="hidden h-9 items-center gap-1 rounded-full bg-white/10 px-3 text-xs font-medium hover:bg-white/20 sm:flex"
+              data-gallery-zoom-in
+              aria-label="Zoom in"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              aria-label={t("gallery.close")}
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+              data-gallery-close
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="relative flex flex-1 items-center justify-center overflow-hidden px-2" data-gallery-stage>
+          <button
+            type="button"
+            aria-label={t("gallery.previous")}
+            class="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:left-4"
+            data-gallery-lb-prev
+          >
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <div class="flex h-full w-full items-center justify-center overflow-hidden" data-gallery-lb-content />
+
+          <button
+            type="button"
+            aria-label={t("gallery.next")}
+            class="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:right-4"
+            data-gallery-lb-next
+          >
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto px-4 py-3 sm:px-6" data-gallery-lb-thumbs />
+      </div>
+    </div>
+  )
+}
+
+<script src="../scripts/offerGallery.client.ts"></script>
